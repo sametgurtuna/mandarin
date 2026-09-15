@@ -1,0 +1,62 @@
+# ===== Claude Code / AI assistant local files =====
+.claude/
+**/.claude/
+.claude/settings.local.json
+.mcp.json
+CLAUDE.local.md
+*.claude-session
+.aider*
+
+# ===== .NET / MSBuild =====
+bin/
+obj/
+out/
+publish/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+# ===== Visual Studio =====
+.vs/
+*.VC.db
+*.VC.VC.opendb
+
+# ===== Rider / JetBrains =====
+.idea/
+*.sln.iml
+
+# ===== VS Code =====
+.vscode/
+!.vscode/extensions.json
+
+# ===== Test / coverage results =====
+TestResults/
+coverage*.json
+coverage*.xml
+coverage*.info
+*.trx
+
+# ===== NuGet =====
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+
+# ===== Local runtime dependencies (never bundled/committed, see CLAUDE.md) =====
+**/ffmpeg/
+ffmpeg.exe
+
+# ===== App settings written at runtime =====
+appsettings.local.json
+
+# ===== OS junk =====
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# ===== Logs / crash dumps =====
+*.log
+*.dmp

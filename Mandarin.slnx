@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Mandarin.App/Mandarin.App.csproj" />
+    <Project Path="src/Mandarin.Core/Mandarin.Core.csproj" />
+    <Project Path="src/Mandarin.Shell/Mandarin.Shell.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Mandarin.Core.Tests/Mandarin.Core.Tests.csproj" />
+    <Project Path="tests/Mandarin.Shell.Tests/Mandarin.Shell.Tests.csproj" />
+  </Folder>
+</Solution>

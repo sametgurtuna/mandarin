@@ -1,0 +1,80 @@
+<Window x:Class="Mandarin.App.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:Mandarin.App.Resources"
+        x:Name="RootWindow"
+        Width="396" SizeToContent="Height"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        ResizeMode="NoResize">
+    <!-- No OS title bar, but a real (non-layered) window: the DWM acrylic
+         backdrop needs a glass frame extended over the whole client area, which
+         a per-pixel-alpha window cannot have. -->
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" CornerRadius="0" GlassFrameThickness="-1"
+                      ResizeBorderThickness="0" UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+
+    <Border x:Name="CardRoot" Style="{StaticResource DialogCard}">
+        <StackPanel>
+            <Grid x:Name="HeaderBar" Height="46" Background="Transparent">
+                <Button Style="{StaticResource CloseButton}"
+                        HorizontalAlignment="Left" Margin="12,0,0,0"
+                        ToolTip="{x:Static res:Strings.CommonCloseTooltip}"
+                        Click="CloseButton_Click" />
+                <TextBlock x:Name="HeaderTitleText" Style="{StaticResource TitleText}"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+
+            <StackPanel Margin="20,0,20,22">
+                <!-- Brand line: the one place the wordmark appears in a dialog. -->
+                <TextBlock x:Name="HeadingText" Style="{StaticResource DisplayText}"
+                           Foreground="{DynamicResource AccentBrush}" />
+                <TextBlock x:Name="TaglineText" Style="{StaticResource SubtitleText}" Margin="0,2,0,0" />
+
+                <Separator />
+
+                <TextBlock Text="{x:Static res:Strings.SettingsThemeLabel}" Style="{StaticResource FieldLabelText}" />
+                <ComboBox x:Name="ThemeComboBox" SelectionChanged="ThemeComboBox_SelectionChanged">
+                    <ComboBoxItem Content="{x:Static res:Strings.SettingsThemeSystem}" Tag="system" />
+                    <ComboBoxItem Content="{x:Static res:Strings.SettingsThemeLight}" Tag="light" />
+                    <ComboBoxItem Content="{x:Static res:Strings.SettingsThemeDark}" Tag="dark" />
+                </ComboBox>
+
+                <Separator />
+
+                <TextBlock x:Name="LanguageLabelText" Style="{StaticResource FieldLabelText}" />
+                <ComboBox x:Name="LanguageComboBox" SelectionChanged="LanguageComboBox_SelectionChanged">
+                    <ComboBoxItem Content="English" Tag="en" />
+                    <ComboBoxItem Content="Türkçe" Tag="tr" />
+                </ComboBox>
+                <TextBlock x:Name="RestartNoticeText" Style="{StaticResource CaptionText}"
+                           Margin="0,6,0,0" Visibility="Collapsed" />
+
+                <Separator />
+
+                <TextBlock x:Name="ExplorerHeadingText" Style="{StaticResource FieldLabelText}" />
+                <CheckBox x:Name="ExplorerIntegrationCheckBox"
+                          Checked="ExplorerIntegrationCheckBox_Changed"
+                          Unchecked="ExplorerIntegrationCheckBox_Changed" />
+                <TextBlock x:Name="ExplorerErrorText" Style="{StaticResource ErrorText}" Margin="0,8,0,0" />
+
+                <Separator />
+
+                <TextBlock Text="{x:Static res:Strings.FfmpegSettingsHeading}" Style="{StaticResource FieldLabelText}" />
+                <TextBlock x:Name="FfmpegStatusText" Style="{StaticResource CaptionText}" Margin="0,0,0,8" />
+                <Button x:Name="FfmpegChooseButton" Content="{x:Static res:Strings.FfmpegChangeButton}"
+                        HorizontalAlignment="Left" Click="FfmpegChooseButton_Click" />
+
+                <Separator />
+
+                <TextBlock x:Name="UpdatesHeadingText" Style="{StaticResource FieldLabelText}" />
+                <Button x:Name="CheckForUpdatesButton" HorizontalAlignment="Left"
+                        Click="CheckForUpdatesButton_Click" />
+                <TextBlock x:Name="UpdateStatusText" Style="{StaticResource CaptionText}"
+                           Margin="0,8,0,0" Visibility="Collapsed" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

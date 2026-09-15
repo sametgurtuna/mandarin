@@ -1,0 +1,35 @@
+<svg width="1100" height="420" viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1100" height="420" fill="#15100c"/>
+
+  <g transform="translate(60,40)">
+    <rect width="980" height="100" rx="16" fill="#2a2018" stroke="#ff8c2b" stroke-width="1.5"/>
+    <text x="24" y="35" font-size="20" font-weight="700" fill="#ffb347">Mandarin.App (WPF)</text>
+    <text x="24" y="62" font-size="14" fill="#c9b8a6">Tray icon, floating panel, radial menu, settings, themes</text>
+    <text x="24" y="84" font-size="14" fill="#c9b8a6">MVVM (CommunityToolkit.Mvvm), localization (EN/TR)</text>
+  </g>
+
+  <g transform="translate(60,180)">
+    <rect width="620" height="180" rx="16" fill="#221a13" stroke="#3a2c1e" stroke-width="1.5"/>
+    <text x="24" y="35" font-size="20" font-weight="700" fill="#fdf6ee">Mandarin.Core</text>
+    <text x="24" y="62" font-size="14" fill="#c9b8a6">Conversion engines (Conversion)</text>
+    <text x="24" y="86" font-size="14" fill="#c9b8a6">Advanced tools (AdvancedTools)</text>
+    <text x="24" y="110" font-size="14" fill="#c9b8a6">Multi file merge (Merge)</text>
+    <text x="24" y="134" font-size="14" fill="#c9b8a6">Format / tool registries</text>
+    <text x="24" y="160" font-size="13" fill="#ff8c2b">No UI reference, usable from a CLI or a</text>
+  </g>
+
+  <g transform="translate(720,180)">
+    <rect width="320" height="180" rx="16" fill="#221a13" stroke="#3a2c1e" stroke-width="1.5"/>
+    <text x="24" y="35" font-size="20" font-weight="700" fill="#fdf6ee">Mandarin.Shell</text>
+    <text x="24" y="62" font-size="14" fill="#c9b8a6">Explorer right click integration</text>
+    <text x="24" y="86" font-size="14" fill="#c9b8a6">Registry based verb</text>
+    <text x="24" y="110" font-size="14" fill="#c9b8a6">No COM or installer needed</text>
+  </g>
+
+  <g transform="translate(60,390)">
+    <rect width="980" height="1" fill="#3a2c1e"/>
+  </g>
+
+  <line x1="370" y1="140" x2="370" y2="180" stroke="#ff8c2b" stroke-width="3"/>
+  <line x1="880" y1="140" x2="880" y2="180" stroke="#ff8c2b" stroke-width="3"/>
+</svg>

@@ -1,0 +1,69 @@
+<Window x:Class="Mandarin.App.Views.PanelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:Mandarin.App.Resources"
+        Title="Mandarin"
+        Width="64" Height="64"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False"
+        Visibility="Collapsed"
+        ShowActivated="False"
+        AllowDrop="True"
+        WindowStartupLocation="Manual"
+        MouseLeftButtonDown="Panel_MouseLeftButtonDown"
+        MouseEnter="Panel_MouseEnter"
+        MouseLeave="Panel_MouseLeave"
+        DragEnter="Panel_DragEnter"
+        DragOver="Panel_DragOver"
+        DragLeave="Panel_DragLeave"
+        Drop="Panel_Drop">
+
+    <Grid Width="64" Height="64" Background="Transparent">
+        <!-- Floating Bubble -->
+        <Ellipse x:Name="BubbleEllipse" Width="56" Height="56"
+                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                 Cursor="Hand"
+                 ToolTip="{x:Static res:Strings.PanelTooltip}">
+            <Ellipse.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{DynamicResource AccentLightColor}" Offset="0" />
+                    <GradientStop Color="{DynamicResource AccentColor}" Offset="1" />
+                </LinearGradientBrush>
+            </Ellipse.Fill>
+            <Ellipse.Effect>
+                <DropShadowEffect BlurRadius="12" ShadowDepth="2" Direction="270" Opacity="0.32" Color="#2B2018" />
+            </Ellipse.Effect>
+        </Ellipse>
+
+        <!-- White Accent Ring on Hover -->
+        <Ellipse x:Name="HoverRing" Width="60" Height="60"
+                 Stroke="#FFFFFF" StrokeThickness="2.5"
+                 Opacity="0.85" Visibility="Collapsed" IsHitTestVisible="False"
+                 HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <!-- Mandarin Leaf / Brand Glyph -->
+        <Path Data="M0,6 C4,0 12,0 16,6 C12,12 4,12 0,6 Z"
+              Fill="{DynamicResource LeafBrush}" Width="14" Height="10" Stretch="Fill"
+              HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"
+              IsHitTestVisible="False" />
+
+        <!-- Status Indicator Glyph (Checkmark / Error) -->
+        <TextBlock x:Name="StatusGlyph" Text="" FontSize="26" FontWeight="Bold" Foreground="White"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Visibility="Collapsed" IsHitTestVisible="False" />
+
+        <!-- Progress Ring Overlay -->
+        <Grid x:Name="ProgressOverlay" Visibility="Collapsed" IsHitTestVisible="False"
+              Width="56" Height="56" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Ellipse Width="56" Height="56" Fill="#B0000000" />
+            <ProgressBar x:Name="ConvertingProgressBar" IsIndeterminate="True"
+                         Width="38" Height="6"
+                         Foreground="{DynamicResource AccentLightBrush}" Background="#44FFFFFF"
+                         BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+    </Grid>
+</Window>

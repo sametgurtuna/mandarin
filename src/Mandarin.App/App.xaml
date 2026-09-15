@@ -1,0 +1,16 @@
+<Application x:Class="Mandarin.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Mandarin.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Index 0 is the colour token set: ThemeManager swaps this one
+                     dictionary to switch between light and dark. Keep it first. -->
+                <ResourceDictionary Source="Themes/Tokens.Light.xaml" />
+                <!-- Design tokens + control styles. See Themes/Theme.xaml. -->
+                <ResourceDictionary Source="Themes/Theme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

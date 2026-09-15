@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Tray_Open" xml:space="preserve"><value>Aç</value></data>
+  <data name="Tray_Settings" xml:space="preserve"><value>Ayarlar</value></data>
+  <data name="Tray_Quit" xml:space="preserve"><value>Çıkış</value></data>
+  <data name="Tray_Tooltip" xml:space="preserve"><value>Mandarin</value></data>
+
+  <data name="Settings_Title" xml:space="preserve"><value>Mandarin Ayarları</value></data>
+  <data name="Settings_Heading" xml:space="preserve"><value>Mandarin</value></data>
+  <data name="Settings_Tagline" xml:space="preserve"><value>Tek tıkla, tamamen çevrimdışı dosya dönüştürücü.</value></data>
+  <data name="Settings_LanguageLabel" xml:space="preserve"><value>Dil</value></data>
+  <data name="Settings_RestartNotice" xml:space="preserve"><value>Dil değişikliğinin uygulanması için Mandarin'i yeniden başlatın.</value></data>
+  <data name="Settings_UpdatesHeading" xml:space="preserve"><value>Güncellemeler</value></data>
+  <data name="Settings_CheckForUpdatesButton" xml:space="preserve"><value>Güncellemeleri denetle</value></data>
+  <data name="Settings_UpToDateMessage" xml:space="preserve"><value>{0} sürümünü kullanıyorsunuz. Mandarin'in henüz denetlenecek bir yayın kanalı yok, bu yüzden bu düğme gerçek bir denetim yapamıyor — ileride bir kanal olduğunda kullanılmak üzere burada duruyor. Mandarin otomatik veya sessizce asla güncelleme denetimi yapmaz.</value></data>
+
+  <data name="Settings_ExplorerHeading" xml:space="preserve"><value>Gezgin entegrasyonu</value></data>
+  <data name="Settings_ExplorerCheckbox" xml:space="preserve"><value>Sağ tık menüsünde "Mandarin ile dönüştür" göster</value></data>
+  <data name="Settings_ExplorerErrorMessage" xml:space="preserve"><value>Sağ tık menüsü güncellenemedi: {0}</value></data>
+
+  <data name="Toast_ConvertedTitle" xml:space="preserve"><value>Dönüştürüldü</value></data>
+  <data name="Toast_ConversionFailedTitle" xml:space="preserve"><value>Dönüştürme başarısız</value></data>
+  <data name="Toast_MergedTitle" xml:space="preserve"><value>Birleştirildi</value></data>
+  <data name="Toast_MergeFailedTitle" xml:space="preserve"><value>Birleştirme başarısız</value></data>
+  <data name="Toast_PartiallyConvertedTitle" xml:space="preserve"><value>Kısmen dönüştürüldü</value></data>
+  <data name="Toast_UnsupportedFileTitle" xml:space="preserve"><value>Desteklenmeyen dosya</value></data>
+  <data name="Toast_UnsupportedFilesTitle" xml:space="preserve"><value>Desteklenmeyen dosyalar</value></data>
+  <data name="Toast_NoTargetFormatTitle" xml:space="preserve"><value>Uygun hedef format yok</value></data>
+  <data name="Toast_NoCommonFormatTitle" xml:space="preserve"><value>Ortak format yok</value></data>
+  <data name="Toast_NoAdvancedToolsTitle" xml:space="preserve"><value>Gelişmiş araç yok</value></data>
+  <data name="Toast_CantMergeTitle" xml:space="preserve"><value>Bu dosyalar birleştirilemiyor</value></data>
+  <data name="Toast_OpenFolderButton" xml:space="preserve"><value>Klasörü aç</value></data>
+
+  <data name="Compress_Title" xml:space="preserve"><value>Sıkıştır</value></data>
+  <data name="Compress_Tagline" xml:space="preserve"><value>Düşük kalite daha küçük dosya boyutu sağlar.</value></data>
+  <data name="Compress_SmallerFile" xml:space="preserve"><value>Küçük dosya</value></data>
+  <data name="Compress_HigherQuality" xml:space="preserve"><value>Yüksek kalite</value></data>
+  <data name="Compress_QualityFormat" xml:space="preserve"><value>Kalite: {0}</value></data>
+  <data name="Common_CancelButton" xml:space="preserve"><value>İptal</value></data>
+  <data name="Compress_CompressButton" xml:space="preserve"><value>Sıkıştır</value></data>
+
+  <data name="AdvancedTool_Compress" xml:space="preserve"><value>Sıkıştır</value></data>
+  <data name="AdvancedTool_Crop" xml:space="preserve"><value>Kırp</value></data>
+  <data name="AdvancedTool_Trim" xml:space="preserve"><value>Kes</value></data>
+  <data name="AdvancedTool_Split" xml:space="preserve"><value>Böl</value></data>
+  <data name="AdvancedTool_StripMetadata" xml:space="preserve"><value>Meta Verisini Temizle</value></data>
+  <data name="Toast_ToolFailedFormat" xml:space="preserve"><value>{0} başarısız</value></data>
+  <data name="Toast_ToolDoneFormat" xml:space="preserve"><value>{0}: tamamlandı</value></data>
+
+  <!-- Advanced tool dialogs (UI/UX pass) -->
+  <data name="Common_SaveButton" xml:space="preserve"><value>Kaydet</value></data>
+  <data name="Common_ApplyButton" xml:space="preserve"><value>Uygula</value></data>
+  <data name="Common_ResetButton" xml:space="preserve"><value>Sıfırla</value></data>
+  <data name="Common_CloseTooltip" xml:space="preserve"><value>Kapat</value></data>
+  <data name="Common_RemoveAllButton" xml:space="preserve"><value>Tümünü kaldır</value></data>
+  <data name="Split_Title" xml:space="preserve"><value>Böl</value></data>
+  <data name="Split_AtLabel" xml:space="preserve"><value>Bölme noktası (dd:ss)</value></data>
+  <data name="Split_Button" xml:space="preserve"><value>Böl</value></data>
+  <data name="Split_FromPageLabel" xml:space="preserve"><value>Başlangıç sayfası</value></data>
+  <data name="Split_ToPageLabel" xml:space="preserve"><value>Bitiş sayfası</value></data>
+  <data name="Crop_Title" xml:space="preserve"><value>Kırp</value></data>
+  <data name="Crop_Hint" xml:space="preserve"><value>Seçmek için sürükleyin, ayarlamak için tutamaçları çekin, kaydırmak için ok tuşları (Ctrl+ok yeniden boyutlandırır).</value></data>
+  <data name="Crop_Button" xml:space="preserve"><value>Kırp</value></data>
+  <data name="Trim_Title" xml:space="preserve"><value>Kısalt</value></data>
+  <data name="Trim_Hint" xml:space="preserve"><value>Kısaltmak için uçları sürükleyin</value></data>
+  <data name="Trim_StepBackTooltip" xml:space="preserve"><value>1 saniye geri</value></data>
+  <data name="Trim_StepForwardTooltip" xml:space="preserve"><value>1 saniye ileri</value></data>
+  <data name="Trim_PlayPauseTooltip" xml:space="preserve"><value>Oynat / duraklat</value></data>
+  <data name="Redact_Title" xml:space="preserve"><value>Sansürle</value></data>
+  <data name="Redact_Hint" xml:space="preserve"><value>Bir alanı kapatmak için görüntü üzerinde sürükleyin.</value></data>
+  <data name="Redact_StyleLabel" xml:space="preserve"><value>Stil</value></data>
+  <data name="Redact_StyleSolid" xml:space="preserve"><value>Düz</value></data>
+  <data name="Redact_StyleBlur" xml:space="preserve"><value>Bulanık</value></data>
+  <data name="Redact_StylePixelate" xml:space="preserve"><value>Pikselli</value></data>
+  <data name="Redact_ColorLabel" xml:space="preserve"><value>Renk</value></data>
+  <data name="Redact_DetectLabel" xml:space="preserve"><value>Algıla</value></data>
+  <data name="Redact_DetectFaces" xml:space="preserve"><value>Yüzler</value></data>
+  <data name="Redact_DetectText" xml:space="preserve"><value>Metin</value></data>
+  <data name="Redact_SaveButton" xml:space="preserve"><value>Sansürlü kopyayı kaydet</value></data>
+  <data name="Metadata_Title" xml:space="preserve"><value>Üst veri</value></data>
+  <data name="Metadata_SearchPlaceholder" xml:space="preserve"><value>Üst veride ara</value></data>
+  <data name="Metadata_RemoveTooltip" xml:space="preserve"><value>Etiketi kaldır</value></data>
+  <data name="Metadata_Notice" xml:space="preserve"><value>Fotoğraflarda “Tümünü kaldır”, gizli kamera ve işleme verilerini de siler. HDR ve portre efektleri değişebilir.</value></data>
+  <data name="Metadata_EmptyState" xml:space="preserve"><value>Gösterilecek üst veri etiketi yok.</value></data>
+  <data name="EditPhoto_Title" xml:space="preserve"><value>Fotoğrafı düzenle</value></data>
+  <data name="EditPhoto_GroupLight" xml:space="preserve"><value>Işık</value></data>
+  <data name="EditPhoto_GroupColor" xml:space="preserve"><value>Renk</value></data>
+  <data name="EditPhoto_GroupDetail" xml:space="preserve"><value>Ayrıntı</value></data>
+  <data name="EditPhoto_Exposure" xml:space="preserve"><value>Pozlama</value></data>
+  <data name="EditPhoto_Brightness" xml:space="preserve"><value>Parlaklık</value></data>
+  <data name="EditPhoto_Contrast" xml:space="preserve"><value>Kontrast</value></data>
+  <data name="EditPhoto_Gamma" xml:space="preserve"><value>Gama</value></data>
+  <data name="EditPhoto_Saturation" xml:space="preserve"><value>Doygunluk</value></data>
+  <data name="EditPhoto_Hue" xml:space="preserve"><value>Ton</value></data>
+  <data name="EditPhoto_Clarity" xml:space="preserve"><value>Netlik</value></data>
+  <data name="EditPhoto_NoiseReduction" xml:space="preserve"><value>Gürültü azaltma</value></data>
+  <data name="EditPhoto_ResetTooltip" xml:space="preserve"><value>Varsayılana döndür</value></data>
+  <data name="EditPhoto_SaveButton" xml:space="preserve"><value>Düzenlenmiş kopyayı kaydet</value></data>
+  <data name="Panel_Tooltip" xml:space="preserve"><value>Dosyayı buraya bırakın. Dönüştürmek için Shift, araçlar için Shift+Alt basılı tutun.</value></data>
+
+  <!-- Radial wheel -->
+  <data name="Radial_ModeConvert" xml:space="preserve"><value>Dönüştür</value></data>
+  <data name="Radial_ModeTools" xml:space="preserve"><value>Araçlar</value></data>
+  <data name="Radial_CenterTitle" xml:space="preserve"><value>Mandarin</value></data>
+  <data name="Radial_CenterHint" xml:space="preserve"><value>Bir seçeneğe bırakın</value></data>
+  <data name="Radial_ShiftBadge" xml:space="preserve"><value>Shift</value></data>
+  <data name="Radial_AltBadge" xml:space="preserve"><value>Alt</value></data>
+
+  <!-- Appearance -->
+  <data name="Settings_ThemeLabel" xml:space="preserve"><value>Görünüm</value></data>
+  <data name="Settings_ThemeSystem" xml:space="preserve"><value>Windows'u izle</value></data>
+  <data name="Settings_ThemeLight" xml:space="preserve"><value>Açık</value></data>
+  <data name="Settings_ThemeDark" xml:space="preserve"><value>Koyu</value></data>
+
+  <!-- FFmpeg setup -->
+  <data name="Ffmpeg_Title" xml:space="preserve"><value>FFmpeg gerekli</value></data>
+  <data name="Ffmpeg_Explanation" xml:space="preserve"><value>Video ve ses işlemleri ffmpeg.exe gerektirir; Mandarin bunu içermez ve asla indirmez. Elinizdeki bir kopyayı gösterin ya da aşağıdaki klasöre bırakın.</value></data>
+  <data name="Ffmpeg_SearchedLabel" xml:space="preserve"><value>Buralara bakıldı</value></data>
+  <data name="Ffmpeg_SearchedPathEnv" xml:space="preserve"><value>...ayrıca PATH üzerinde ve WinGet paket klasöründe</value></data>
+  <data name="Ffmpeg_LocateButton" xml:space="preserve"><value>ffmpeg.exe'yi seç…</value></data>
+  <data name="Ffmpeg_NotConfigured" xml:space="preserve"><value>Henüz bir kopya tanımlanmadı.</value></data>
+  <data name="Ffmpeg_CurrentPathFormat" xml:space="preserve"><value>Kullanılan: {0}</value></data>
+  <data name="Ffmpeg_NotValid" xml:space="preserve"><value>Bu dosya ffmpeg gibi yanıt vermedi. ffmpeg.exe'nin kendisini seçin.</value></data>
+  <data name="Ffmpeg_SettingsHeading" xml:space="preserve"><value>FFmpeg (video ve ses)</value></data>
+  <data name="Ffmpeg_StatusFound" xml:space="preserve"><value>Bulundu ve çalışıyor.</value></data>
+  <data name="Ffmpeg_StatusMissing" xml:space="preserve"><value>Bulunamadı — video ve ses dönüştürmeleri başarısız olur.</value></data>
+  <data name="Ffmpeg_ChangeButton" xml:space="preserve"><value>ffmpeg.exe seç…</value></data>
+
+  <!-- Output preview -->
+  <data name="Output_PreviewFormat" xml:space="preserve"><value>→ {0}, kaynağın yanına kaydedilir</value></data>
+  <data name="Output_PreviewPairFormat" xml:space="preserve"><value>→ {0} + {1}, kaynağın yanına kaydedilir</value></data>
+
+  <!-- Crop -->
+  <data name="Crop_AspectLabel" xml:space="preserve"><value>Oran</value></data>
+  <data name="Crop_AspectFree" xml:space="preserve"><value>Serbest</value></data>
+  <data name="Crop_AspectOriginal" xml:space="preserve"><value>Özgün</value></data>
+  <data name="Crop_SizeFormat" xml:space="preserve"><value>{0} × {1} px</value></data>
+  <data name="Crop_NoSelection" xml:space="preserve"><value>Önce görüntü üzerinde sürükleyerek bir alan seçin.</value></data>
+
+  <!-- Compress options -->
+  <data name="Compress_ModeQuality" xml:space="preserve"><value>Kalite</value></data>
+  <data name="Compress_ModeTargetSize" xml:space="preserve"><value>Hedef boyut</value></data>
+  <data name="Compress_TargetLabel" xml:space="preserve"><value>Şunun altına indir</value></data>
+  <data name="Compress_CurrentSizeFormat" xml:space="preserve"><value>Şu an {0} MB</value></data>
+  <data name="Compress_TargetInvalid" xml:space="preserve"><value>MB cinsinden bir boyut girin, örneğin 8 veya 1,5.</value></data>
+  <data name="Compress_TargetTooBigFormat" xml:space="preserve"><value>Bu, özgün dosyadan ({0} MB) küçük değil.</value></data>
+  <data name="Compress_MaxSizeLabel" xml:space="preserve"><value>En uzun kenar</value></data>
+  <data name="Compress_KeepOriginal" xml:space="preserve"><value>Özgün kalsın</value></data>
+  <data name="Compress_Lossless" xml:space="preserve"><value>Kayıpsız (daha büyük, piksel piksel aynı)</value></data>
+  <data name="Compress_ResolutionLabel" xml:space="preserve"><value>Çözünürlük</value></data>
+  <data name="Compress_AudioLabel" xml:space="preserve"><value>Ses</value></data>
+  <data name="Compress_AudioAuto" xml:space="preserve"><value>Kaliteye göre</value></data>
+</root>

@@ -1,0 +1,31 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1310"/>
+      <stop offset="100%" stop-color="#2b1c14"/>
+    </linearGradient>
+    <linearGradient id="mandarin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb347"/>
+      <stop offset="100%" stop-color="#ff7a1a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff8c2b" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ff8c2b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  <circle cx="1010" cy="150" r="220" fill="url(#glow)"/>
+
+  <circle cx="1010" cy="150" r="70" fill="url(#mandarin)"/>
+  <path d="M1010 82 C1000 70, 1020 70, 1012 84" stroke="#5a3a1a" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M990 92 q20 -18 40 0" stroke="#e8600a" stroke-width="3" fill="none" opacity="0.6"/>
+  <path d="M980 120 q30 -10 60 0" stroke="#e8600a" stroke-width="3" fill="none" opacity="0.5"/>
+  <path d="M978 150 h64" stroke="#e8600a" stroke-width="3" fill="none" opacity="0.4"/>
+  <path d="M980 180 q30 10 60 0" stroke="#e8600a" stroke-width="3" fill="none" opacity="0.5"/>
+
+  <g transform="translate(90,95)">
+    <text x="0" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="64" font-weight="700" fill="#fdf6ee">Mandarin</text>
+    <text x="4" y="100" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#ffb347">Zero click, fully offline file converter for Windows</text>
+  </g>
+</svg>

@@ -1,0 +1,136 @@
+<Window x:Class="Mandarin.App.Views.CompressOptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:res="clr-namespace:Mandarin.App.Resources"
+        Width="420" SizeToContent="Height"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+    <!-- No OS title bar, but a real (non-layered) window: the DWM acrylic
+         backdrop needs a glass frame extended over the whole client area, which
+         a per-pixel-alpha window cannot have. -->
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" CornerRadius="0" GlassFrameThickness="-1"
+                      ResizeBorderThickness="0" UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+
+    <Border x:Name="CardRoot" Style="{StaticResource DialogCard}">
+        <StackPanel>
+            <Grid x:Name="HeaderBar" Height="46" Background="Transparent">
+                <Button x:Name="HeaderCloseButton" Style="{StaticResource CloseButton}"
+                        HorizontalAlignment="Left" Margin="12,0,0,0"
+                        ToolTip="{x:Static res:Strings.CommonCloseTooltip}"
+                        Click="CancelButton_Click" />
+                <TextBlock x:Name="HeadingText" Style="{StaticResource TitleText}"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+
+            <StackPanel Margin="20,0,20,18">
+                <TextBlock x:Name="TaglineText" Style="{StaticResource SubtitleText}" Margin="0,0,0,16" />
+
+                <!-- Two ways to ask for the same thing: pick a quality, or name a
+                     size and let Mandarin find the quality that fits. -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                    <RadioButton x:Name="QualityModeRadio" GroupName="CompressMode" IsChecked="True"
+                                 Content="{x:Static res:Strings.CompressModeQuality}"
+                                 Margin="0,0,20,0" Checked="Mode_Changed" />
+                    <RadioButton x:Name="TargetModeRadio" GroupName="CompressMode"
+                                 Content="{x:Static res:Strings.CompressModeTargetSize}"
+                                 Checked="Mode_Changed" />
+                </StackPanel>
+
+                <!-- Quality mode -->
+                <StackPanel x:Name="QualityPanel">
+                    <TextBlock x:Name="QualityLabel" Style="{StaticResource DisplayText}"
+                               HorizontalAlignment="Center" Margin="0,0,0,6" />
+                    <Slider x:Name="QualitySlider" Minimum="1" Maximum="100" Value="75"
+                            TickFrequency="5" IsSnapToTickEnabled="True"
+                            ValueChanged="QualitySlider_ValueChanged" />
+                    <Grid Margin="0,4,0,0">
+                        <TextBlock x:Name="SmallerFileText" Style="{StaticResource CaptionText}" HorizontalAlignment="Left" />
+                        <TextBlock x:Name="HigherQualityText" Style="{StaticResource CaptionText}" HorizontalAlignment="Right" />
+                    </Grid>
+                </StackPanel>
+
+                <!-- Target size mode -->
+                <StackPanel x:Name="TargetPanel" Visibility="Collapsed">
+                    <TextBlock Text="{x:Static res:Strings.CompressTargetLabel}" Style="{StaticResource FieldLabelText}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TargetSizeTextBox" Text="10" TextChanged="TargetSize_TextChanged" />
+                        <TextBlock Grid.Column="1" Text="MB" VerticalAlignment="Center" Margin="10,0,0,0"
+                                   Foreground="{DynamicResource TextSecondaryBrush}" />
+                    </Grid>
+                    <TextBlock x:Name="CurrentSizeText" Style="{StaticResource CaptionText}" Margin="0,6,0,0" />
+                </StackPanel>
+
+                <!-- Image-only refinements -->
+                <StackPanel x:Name="ImageOptionsPanel" Margin="0,16,0,0" Visibility="Collapsed">
+                    <Separator Margin="0,0,0,12" />
+                    <Grid Margin="0,0,0,10">
+                        <TextBlock Text="{x:Static res:Strings.CompressMaxSizeLabel}"
+                                   Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" />
+                        <ComboBox x:Name="MaxEdgeComboBox" Width="150" HorizontalAlignment="Right">
+                            <ComboBoxItem Content="{x:Static res:Strings.CompressKeepOriginal}" Tag="0" IsSelected="True" />
+                            <ComboBoxItem Content="4000 px" Tag="4000" />
+                            <ComboBoxItem Content="2560 px" Tag="2560" />
+                            <ComboBoxItem Content="1920 px" Tag="1920" />
+                            <ComboBoxItem Content="1280 px" Tag="1280" />
+                            <ComboBoxItem Content="800 px" Tag="800" />
+                        </ComboBox>
+                    </Grid>
+                    <CheckBox x:Name="LosslessCheckBox" Content="{x:Static res:Strings.CompressLossless}"
+                              Visibility="Collapsed" Checked="Lossless_Changed" Unchecked="Lossless_Changed" />
+                </StackPanel>
+
+                <!-- Video-only refinements -->
+                <StackPanel x:Name="VideoOptionsPanel" Margin="0,16,0,0" Visibility="Collapsed">
+                    <Separator Margin="0,0,0,12" />
+                    <Grid>
+                        <TextBlock Text="{x:Static res:Strings.CompressResolutionLabel}"
+                                   Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" />
+                        <ComboBox x:Name="ResolutionComboBox" Width="150" HorizontalAlignment="Right">
+                            <ComboBoxItem Content="{x:Static res:Strings.CompressKeepOriginal}" Tag="0" IsSelected="True" />
+                            <ComboBoxItem Content="1080p" Tag="1080" />
+                            <ComboBoxItem Content="720p" Tag="720" />
+                            <ComboBoxItem Content="480p" Tag="480" />
+                            <ComboBoxItem Content="360p" Tag="360" />
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+
+                <!-- Video and audio -->
+                <StackPanel x:Name="AudioOptionsPanel" Margin="0,10,0,0" Visibility="Collapsed">
+                    <Grid>
+                        <TextBlock Text="{x:Static res:Strings.CompressAudioLabel}"
+                                   Foreground="{DynamicResource TextSecondaryBrush}" VerticalAlignment="Center" />
+                        <ComboBox x:Name="AudioBitrateComboBox" Width="150" HorizontalAlignment="Right">
+                            <ComboBoxItem Content="{x:Static res:Strings.CompressAudioAuto}" Tag="0" IsSelected="True" />
+                            <ComboBoxItem Content="320 kbps" Tag="320" />
+                            <ComboBoxItem Content="256 kbps" Tag="256" />
+                            <ComboBoxItem Content="192 kbps" Tag="192" />
+                            <ComboBoxItem Content="128 kbps" Tag="128" />
+                            <ComboBoxItem Content="96 kbps" Tag="96" />
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+
+                <TextBlock x:Name="OutputPreviewText" Style="{StaticResource CaptionText}"
+                           Margin="0,16,0,0" Visibility="Collapsed" />
+                <TextBlock x:Name="ErrorText" Style="{StaticResource ErrorText}" Margin="0,8,0,0" />
+            </StackPanel>
+
+            <Border Style="{StaticResource DialogFooterBar}" Padding="20,14">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="CancelButton" Margin="0,0,10,0" Click="CancelButton_Click" />
+                    <Button x:Name="CompressButton" Click="OkButton_Click" IsDefault="True" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>

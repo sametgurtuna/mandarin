@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Tray_Open" xml:space="preserve"><value>Open</value></data>
+  <data name="Tray_Settings" xml:space="preserve"><value>Settings</value></data>
+  <data name="Tray_Quit" xml:space="preserve"><value>Quit</value></data>
+  <data name="Tray_Tooltip" xml:space="preserve"><value>Mandarin</value></data>
+
+  <data name="Settings_Title" xml:space="preserve"><value>Mandarin Settings</value></data>
+  <data name="Settings_Heading" xml:space="preserve"><value>Mandarin</value></data>
+  <data name="Settings_Tagline" xml:space="preserve"><value>Zero-click, fully offline file converter.</value></data>
+  <data name="Settings_LanguageLabel" xml:space="preserve"><value>Language</value></data>
+  <data name="Settings_RestartNotice" xml:space="preserve"><value>Restart Mandarin for the language change to take effect.</value></data>
+  <data name="Settings_UpdatesHeading" xml:space="preserve"><value>Updates</value></data>
+  <data name="Settings_CheckForUpdatesButton" xml:space="preserve"><value>Check for updates</value></data>
+  <data name="Settings_UpToDateMessage" xml:space="preserve"><value>You're on version {0}. Mandarin doesn't have a release channel to check against yet, so this button can't do a real check — it's here for when one exists. Mandarin will never check for updates automatically or silently.</value></data>
+
+  <data name="Settings_ExplorerHeading" xml:space="preserve"><value>Explorer integration</value></data>
+  <data name="Settings_ExplorerCheckbox" xml:space="preserve"><value>Show "Convert with Mandarin" on the right-click menu</value></data>
+  <data name="Settings_ExplorerErrorMessage" xml:space="preserve"><value>Couldn't update the right-click menu: {0}</value></data>
+
+  <data name="Toast_ConvertedTitle" xml:space="preserve"><value>Converted</value></data>
+  <data name="Toast_ConversionFailedTitle" xml:space="preserve"><value>Conversion failed</value></data>
+  <data name="Toast_MergedTitle" xml:space="preserve"><value>Merged</value></data>
+  <data name="Toast_MergeFailedTitle" xml:space="preserve"><value>Merge failed</value></data>
+  <data name="Toast_PartiallyConvertedTitle" xml:space="preserve"><value>Partially converted</value></data>
+  <data name="Toast_UnsupportedFileTitle" xml:space="preserve"><value>Unsupported file</value></data>
+  <data name="Toast_UnsupportedFilesTitle" xml:space="preserve"><value>Unsupported files</value></data>
+  <data name="Toast_NoTargetFormatTitle" xml:space="preserve"><value>No target format available</value></data>
+  <data name="Toast_NoCommonFormatTitle" xml:space="preserve"><value>No common format</value></data>
+  <data name="Toast_NoAdvancedToolsTitle" xml:space="preserve"><value>No advanced tools available</value></data>
+  <data name="Toast_CantMergeTitle" xml:space="preserve"><value>Can't merge these files</value></data>
+  <data name="Toast_OpenFolderButton" xml:space="preserve"><value>Open folder</value></data>
+
+  <data name="Compress_Title" xml:space="preserve"><value>Compress</value></data>
+  <data name="Compress_Tagline" xml:space="preserve"><value>Lower quality makes a smaller file.</value></data>
+  <data name="Compress_SmallerFile" xml:space="preserve"><value>Smaller file</value></data>
+  <data name="Compress_HigherQuality" xml:space="preserve"><value>Higher quality</value></data>
+  <data name="Compress_QualityFormat" xml:space="preserve"><value>Quality: {0}</value></data>
+  <data name="Common_CancelButton" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Compress_CompressButton" xml:space="preserve"><value>Compress</value></data>
+
+  <data name="AdvancedTool_Compress" xml:space="preserve"><value>Compress</value></data>
+  <data name="AdvancedTool_Crop" xml:space="preserve"><value>Crop</value></data>
+  <data name="AdvancedTool_Trim" xml:space="preserve"><value>Trim</value></data>
+  <data name="AdvancedTool_Split" xml:space="preserve"><value>Split</value></data>
+  <data name="AdvancedTool_StripMetadata" xml:space="preserve"><value>Strip Metadata</value></data>
+  <data name="Toast_ToolFailedFormat" xml:space="preserve"><value>{0} failed</value></data>
+  <data name="Toast_ToolDoneFormat" xml:space="preserve"><value>{0}: done</value></data>
+
+  <!-- Advanced tool dialogs (UI/UX pass) -->
+  <data name="Common_SaveButton" xml:space="preserve"><value>Save</value></data>
+  <data name="Common_ApplyButton" xml:space="preserve"><value>Apply</value></data>
+  <data name="Common_ResetButton" xml:space="preserve"><value>Reset</value></data>
+  <data name="Common_CloseTooltip" xml:space="preserve"><value>Close</value></data>
+  <data name="Common_RemoveAllButton" xml:space="preserve"><value>Remove all</value></data>
+  <data name="Split_Title" xml:space="preserve"><value>Split</value></data>
+  <data name="Split_AtLabel" xml:space="preserve"><value>Split at (mm:ss)</value></data>
+  <data name="Split_Button" xml:space="preserve"><value>Split</value></data>
+  <data name="Split_FromPageLabel" xml:space="preserve"><value>From page</value></data>
+  <data name="Split_ToPageLabel" xml:space="preserve"><value>To page</value></data>
+  <data name="Crop_Title" xml:space="preserve"><value>Crop</value></data>
+  <data name="Crop_Hint" xml:space="preserve"><value>Drag to select, drag the handles to adjust, arrow keys to nudge (Ctrl+arrows resize).</value></data>
+  <data name="Crop_Button" xml:space="preserve"><value>Crop</value></data>
+  <data name="Trim_Title" xml:space="preserve"><value>Trim</value></data>
+  <data name="Trim_Hint" xml:space="preserve"><value>Drag the ends to trim</value></data>
+  <data name="Trim_StepBackTooltip" xml:space="preserve"><value>Back 1 second</value></data>
+  <data name="Trim_StepForwardTooltip" xml:space="preserve"><value>Forward 1 second</value></data>
+  <data name="Trim_PlayPauseTooltip" xml:space="preserve"><value>Play / pause</value></data>
+  <data name="Redact_Title" xml:space="preserve"><value>Redact</value></data>
+  <data name="Redact_Hint" xml:space="preserve"><value>Drag on the image to cover an area.</value></data>
+  <data name="Redact_StyleLabel" xml:space="preserve"><value>Style</value></data>
+  <data name="Redact_StyleSolid" xml:space="preserve"><value>Solid</value></data>
+  <data name="Redact_StyleBlur" xml:space="preserve"><value>Blur</value></data>
+  <data name="Redact_StylePixelate" xml:space="preserve"><value>Pixelate</value></data>
+  <data name="Redact_ColorLabel" xml:space="preserve"><value>Color</value></data>
+  <data name="Redact_DetectLabel" xml:space="preserve"><value>Detect</value></data>
+  <data name="Redact_DetectFaces" xml:space="preserve"><value>Faces</value></data>
+  <data name="Redact_DetectText" xml:space="preserve"><value>Text</value></data>
+  <data name="Redact_SaveButton" xml:space="preserve"><value>Save redacted copy</value></data>
+  <data name="Metadata_Title" xml:space="preserve"><value>Metadata</value></data>
+  <data name="Metadata_SearchPlaceholder" xml:space="preserve"><value>Search metadata</value></data>
+  <data name="Metadata_RemoveTooltip" xml:space="preserve"><value>Remove tag</value></data>
+  <data name="Metadata_Notice" xml:space="preserve"><value>For photos, Remove all also clears hidden camera and processing data. HDR and portrait effects may change.</value></data>
+  <data name="Metadata_EmptyState" xml:space="preserve"><value>No metadata tags to show.</value></data>
+  <data name="EditPhoto_Title" xml:space="preserve"><value>Edit photo</value></data>
+  <data name="EditPhoto_GroupLight" xml:space="preserve"><value>Light</value></data>
+  <data name="EditPhoto_GroupColor" xml:space="preserve"><value>Color</value></data>
+  <data name="EditPhoto_GroupDetail" xml:space="preserve"><value>Detail</value></data>
+  <data name="EditPhoto_Exposure" xml:space="preserve"><value>Exposure</value></data>
+  <data name="EditPhoto_Brightness" xml:space="preserve"><value>Brightness</value></data>
+  <data name="EditPhoto_Contrast" xml:space="preserve"><value>Contrast</value></data>
+  <data name="EditPhoto_Gamma" xml:space="preserve"><value>Gamma</value></data>
+  <data name="EditPhoto_Saturation" xml:space="preserve"><value>Saturation</value></data>
+  <data name="EditPhoto_Hue" xml:space="preserve"><value>Hue</value></data>
+  <data name="EditPhoto_Clarity" xml:space="preserve"><value>Clarity</value></data>
+  <data name="EditPhoto_NoiseReduction" xml:space="preserve"><value>Noise reduction</value></data>
+  <data name="EditPhoto_ResetTooltip" xml:space="preserve"><value>Reset to default</value></data>
+  <data name="EditPhoto_SaveButton" xml:space="preserve"><value>Save edited copy</value></data>
+  <data name="Panel_Tooltip" xml:space="preserve"><value>Drop a file here. Hold Shift to convert, Shift+Alt for tools.</value></data>
+
+  <!-- Radial wheel -->
+  <data name="Radial_ModeConvert" xml:space="preserve"><value>Convert</value></data>
+  <data name="Radial_ModeTools" xml:space="preserve"><value>Tools</value></data>
+  <data name="Radial_CenterTitle" xml:space="preserve"><value>Mandarin</value></data>
+  <data name="Radial_CenterHint" xml:space="preserve"><value>Drop on an option</value></data>
+  <data name="Radial_ShiftBadge" xml:space="preserve"><value>Shift</value></data>
+  <data name="Radial_AltBadge" xml:space="preserve"><value>Alt</value></data>
+
+  <!-- Appearance -->
+  <data name="Settings_ThemeLabel" xml:space="preserve"><value>Appearance</value></data>
+  <data name="Settings_ThemeSystem" xml:space="preserve"><value>Follow Windows</value></data>
+  <data name="Settings_ThemeLight" xml:space="preserve"><value>Light</value></data>
+  <data name="Settings_ThemeDark" xml:space="preserve"><value>Dark</value></data>
+
+  <!-- FFmpeg setup -->
+  <data name="Ffmpeg_Title" xml:space="preserve"><value>FFmpeg needed</value></data>
+  <data name="Ffmpeg_Explanation" xml:space="preserve"><value>Video and audio work needs ffmpeg.exe, which Mandarin doesn't ship and never downloads. Point it at a copy you already have, or drop one into the folder below.</value></data>
+  <data name="Ffmpeg_SearchedLabel" xml:space="preserve"><value>Looked for it here</value></data>
+  <data name="Ffmpeg_SearchedPathEnv" xml:space="preserve"><value>...and on PATH, and in the WinGet package folder</value></data>
+  <data name="Ffmpeg_LocateButton" xml:space="preserve"><value>Locate ffmpeg.exe…</value></data>
+  <data name="Ffmpeg_NotConfigured" xml:space="preserve"><value>No copy configured yet.</value></data>
+  <data name="Ffmpeg_CurrentPathFormat" xml:space="preserve"><value>Currently using: {0}</value></data>
+  <data name="Ffmpeg_NotValid" xml:space="preserve"><value>That file didn't respond like ffmpeg. Pick ffmpeg.exe itself.</value></data>
+  <data name="Ffmpeg_SettingsHeading" xml:space="preserve"><value>FFmpeg (video and audio)</value></data>
+  <data name="Ffmpeg_StatusFound" xml:space="preserve"><value>Found and working.</value></data>
+  <data name="Ffmpeg_StatusMissing" xml:space="preserve"><value>Not found — video and audio conversions will fail.</value></data>
+  <data name="Ffmpeg_ChangeButton" xml:space="preserve"><value>Choose ffmpeg.exe…</value></data>
+
+  <!-- Output preview -->
+  <data name="Output_PreviewFormat" xml:space="preserve"><value>→ {0}, saved next to the original</value></data>
+  <data name="Output_PreviewPairFormat" xml:space="preserve"><value>→ {0} + {1}, saved next to the original</value></data>
+
+  <!-- Crop -->
+  <data name="Crop_AspectLabel" xml:space="preserve"><value>Aspect</value></data>
+  <data name="Crop_AspectFree" xml:space="preserve"><value>Free</value></data>
+  <data name="Crop_AspectOriginal" xml:space="preserve"><value>Original</value></data>
+  <data name="Crop_SizeFormat" xml:space="preserve"><value>{0} × {1} px</value></data>
+  <data name="Crop_NoSelection" xml:space="preserve"><value>Drag on the image to select an area first.</value></data>
+
+  <!-- Compress options -->
+  <data name="Compress_ModeQuality" xml:space="preserve"><value>Quality</value></data>
+  <data name="Compress_ModeTargetSize" xml:space="preserve"><value>Target size</value></data>
+  <data name="Compress_TargetLabel" xml:space="preserve"><value>Get it under</value></data>
+  <data name="Compress_CurrentSizeFormat" xml:space="preserve"><value>Currently {0} MB</value></data>
+  <data name="Compress_TargetInvalid" xml:space="preserve"><value>Enter a size in MB, for example 8 or 1.5.</value></data>
+  <data name="Compress_TargetTooBigFormat" xml:space="preserve"><value>That's not smaller than the original ({0} MB).</value></data>
+  <data name="Compress_MaxSizeLabel" xml:space="preserve"><value>Max long edge</value></data>
+  <data name="Compress_KeepOriginal" xml:space="preserve"><value>Keep original</value></data>
+  <data name="Compress_Lossless" xml:space="preserve"><value>Lossless (bigger, pixel-perfect)</value></data>
+  <data name="Compress_ResolutionLabel" xml:space="preserve"><value>Resolution</value></data>
+  <data name="Compress_AudioLabel" xml:space="preserve"><value>Audio</value></data>
+  <data name="Compress_AudioAuto" xml:space="preserve"><value>Match quality</value></data>
+</root>
