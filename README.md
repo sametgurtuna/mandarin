@@ -1,134 +1,195 @@
 <div align="center">
 
-<img src="assets/readme/banner.svg" alt="Mandarin banner" width="100%" />
+<img src="assets/readme/hero.png" alt="Mandarin" width="100%">
 
-<br/>
+<p>
+  <a href="https://dotnet.microsoft.com/download/dotnet/8.0"><img src="https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt=".NET 8"></a>
+  <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6?style=flat-square&logo=windows&logoColor=white" alt="Windows 10 and 11">
+  <img src="https://img.shields.io/badge/UI-WPF-3E8EDE?style=flat-square" alt="WPF">
+  <img src="https://img.shields.io/badge/network%20calls-none-2EA44F?style=flat-square" alt="No network calls">
+  <img src="https://img.shields.io/badge/install-single%20exe-8A63D2?style=flat-square" alt="Single executable">
+</p>
 
-[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/download/dotnet/8.0)
-[![Platform](https://img.shields.io/badge/Platform-Windows%2011-0078D6?logo=windowsxp&logoColor=white)](#)
-[![WPF](https://img.shields.io/badge/UI-WPF-3E8EDE)](#)
-[![Offline](https://img.shields.io/badge/100%25-Offline-2ea44f)](#)
-[![License](https://img.shields.io/badge/license-TBD-lightgrey)](#)
-
-**A zero click, fully offline file converter for Windows.**
-Inspired by [Tangerine for Mac](https://tangerineformac.com).
+<p><b>Drop a file on the panel. Pick a format. Done.</b><br>
+No upload, no sign in, no wizard. Everything runs on your machine.</p>
 
 </div>
 
 ---
 
-## Table of contents
+## Contents
 
-- [Features](#features)
-- [How it works](#how-it-works)
-- [Supported formats](#supported-formats)
-- [Architecture](#architecture)
-- [Getting started](#getting-started)
-- [Commands](#commands)
-- [Explorer integration](#explorer-integration)
-- [Project structure](#project-structure)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
+[Overview](#overview) · [The three gestures](#the-three-gestures) · [Advanced tools](#advanced-tools) ·
+[Supported formats](#supported-formats) · [Themes and language](#themes-and-language) ·
+[Architecture](#architecture) · [Getting started](#getting-started) ·
+[Building and publishing](#building-and-publishing) · [Explorer integration](#explorer-integration) ·
+[Project layout](#project-layout) · [Design principles](#design-principles) · [Roadmap](#roadmap)
 
 ---
 
-## Features
+## Overview
+
+Mandarin is a file converter that stays out of the way. It lives in the tray as a small
+floating panel; you drag a file onto it and the conversion happens in place, with no
+window to manage and no file ever leaving the machine.
+
+|  |  |
+|---|---|
+| **Zero click** | Hold Shift while dropping and Mandarin converts straight to the last used format. No dialog at all. |
+| **Fully offline** | No network calls anywhere in the codebase, no telemetry, no analytics, no update pings. |
+| **Never blocks** | Conversions run async with a cancellable progress HUD. Bad input produces a message, never a crash. |
+| **Single executable** | Publishes as one self contained `.exe`. No .NET runtime, no installer, no admin rights. |
+| **Native look** | Windows 11 acrylic dialogs, system light and dark theme, English and Turkish. |
+
+<div align="center">
+  <img src="assets/readme/panel.png" alt="The floating Mandarin panel" width="150">
+  <br>
+  <sub>The panel. That is the entire permanent UI.</sub>
+</div>
+
+## The three gestures
+
+Everything Mandarin does is reachable from a drop. The modifier you hold decides what
+happens.
 
 <table>
 <tr>
-<td width="33%" valign="top">
-
-### 🎯 Zero click
-Drop a file onto the floating panel and pick a format. The whole conversion takes seconds.
-
+<td width="50%" align="center" valign="top">
+<img src="assets/readme/convert-wheel.png" alt="Convert wheel" width="100%">
+<br><b>Drop</b> or <b>Shift + drop</b>
+<br><sub>The radial wheel lists every format the dropped file can become. Keyboard navigable, or release over a petal.</sub>
 </td>
-<td width="33%" valign="top">
-
-### 🔒 Fully offline
-No network calls at all. No analytics, no telemetry, no silent background connections.
-
-</td>
-<td width="33%" valign="top">
-
-### 🌗 Light / dark theme
-Follows the Windows system theme live, or can be set to light or dark manually.
-
-</td>
-</tr>
-<tr>
-<td width="33%" valign="top">
-
-### ⚡ Batch conversion
-Drop several files at once and convert all of them to a single target format.
-
-</td>
-<td width="33%" valign="top">
-
-### 🧰 Advanced tools
-Compress, crop, trim, split, merge, and strip metadata, all in one panel.
-
-</td>
-<td width="33%" valign="top">
-
-### 🖱️ Explorer integration
-Adds a single "Convert with Mandarin" entry to the right click menu.
-
+<td width="50%" align="center" valign="top">
+<img src="assets/readme/tools-wheel.png" alt="Advanced tools wheel" width="100%">
+<br><b>Shift + Alt + drop</b>
+<br><sub>The same wheel switches to the advanced tools available for that file type.</sub>
 </td>
 </tr>
 </table>
 
-## How it works
-
-<img src="assets/readme/workflow.svg" alt="Mandarin workflow" width="100%" />
-
 | Gesture | Result |
 |---|---|
-| **Drop** | Pick a target format from a keyboard navigable popup |
-| **Shift + drop** | Converts instantly to the last used (or best guess) format |
-| **Shift+Alt + drop** | Opens advanced tools: compress, crop, trim, split, strip metadata |
-| **Shift+Alt + drop multiple** (same type) | Merges the files into one |
-| **Drop multiple files** | Batch converts all of them to one target format |
+| Drop | Radial wheel with every target format for that file |
+| Shift + drop | Instant conversion to the last used or best guess format |
+| Shift + Alt + drop | Advanced tools for that file type |
+| Drop several files | Batch conversion, all files to one target format |
+| Shift + Alt + drop several files of one type | Merge them into a single file |
+
+<div align="center">
+  <img src="assets/readme/progress-hud.png" alt="Progress HUD" width="420">
+  <br>
+  <sub>Progress is cancellable, and the result opens the output folder on click.</sub>
+</div>
+
+## Advanced tools
+
+Each tool previews the exact file it is about to write before you commit, using the same
+naming helper the tool itself uses, so the preview cannot drift from the real output.
+
+<table>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="assets/readme/tool-edit-photo.png" alt="Edit photo" width="100%">
+<br><b>Edit photo</b>
+<br><sub>Exposure, brightness, contrast, gamma, saturation and hue, with per slider reset.</sub>
+</td>
+<td width="50%" align="center" valign="top">
+<img src="assets/readme/tool-crop.png" alt="Crop" width="100%">
+<br><b>Crop</b>
+<br><sub>Free or fixed aspect, handles to adjust, arrow keys to nudge. Works for images and video.</sub>
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="assets/readme/tool-metadata.png" alt="Metadata" width="100%">
+<br><b>Metadata</b>
+<br><sub>Inspect, search, remove single fields, or strip everything including hidden camera data.</sub>
+</td>
+<td width="50%" align="center" valign="top">
+<img src="assets/readme/tool-compress.png" alt="Compress" width="100%">
+<br><b>Compress</b>
+<br><sub>Target a quality level or a target file size, with an optional maximum long edge.</sub>
+</td>
+</tr>
+</table>
+
+Also available: **trim** (video and audio), **split** (PDF page ranges, media at a
+timestamp), **redact** (images and video), **strip metadata** and **merge**.
 
 ## Supported formats
 
 | Category | Formats |
 |---|---|
-| 🖼️ **Images** | JPG, PNG, WebP, HEIC, TIFF, AVIF, BMP, GIF, SVG (read), plus export to PDF/DOCX |
-| 🎬 **Video / audio** | MP4, MOV, MKV, WebM, AVI, WMV, GIF, MP3, M4A, WAV, FLAC, OGG, Opus, AIFF, WMA |
-| 📄 **PDF** | PDF → DOCX, JPG/PNG (300 DPI, all pages), TXT · TXT → PDF, JPG, PNG, SRT, VTT |
-| 💬 **Subtitles** | SRT ↔ VTT ↔ TXT |
-| 🗜️ **Archives** | Create/extract ZIP, TAR, GZIP · extract only for RAR |
-| 🛠️ **Advanced tools** | Compress (quality slider), crop, trim, split, strip metadata, merge |
+| **Images** | JPG, PNG, WebP, HEIC, TIFF, AVIF, BMP, GIF, SVG (read), plus export to PDF and DOCX |
+| **Video** | MP4, MOV, MKV, WebM, AVI, WMV, GIF, including extraction of the audio track |
+| **Audio** | MP3, M4A, WAV, FLAC, OGG, Opus, AIFF, WMA |
+| **PDF** | To DOCX, to JPG or PNG at 300 DPI for all pages, to TXT. From TXT to PDF |
+| **Text** | TXT to PDF, JPG, PNG, SRT, VTT |
+| **Subtitles** | SRT, VTT and TXT, in every direction |
+| **Archives** | Create and extract ZIP, TAR and GZIP. Extract only for RAR |
+
+Image work is handled by Magick.NET, PDF by PdfPig, PDFtoImage and PdfSharpCore, archives
+by SharpCompress, and video and audio by a bundled local `ffmpeg.exe` invoked as a process
+behind an interface, so it can be mocked in tests.
+
+## Themes and language
+
+The theme follows the Windows app mode live, or can be pinned to light or dark. Every
+colour in the app is a token resolved through `DynamicResource`, so the switch applies
+instantly without restarting. The interface ships in English and Turkish.
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/readme/settings-dark.png" alt="Settings, dark theme" width="86%"><br><sub>Dark</sub></td>
+<td width="50%" align="center"><img src="assets/readme/settings-light.png" alt="Settings, light theme" width="86%"><br><sub>Light</sub></td>
+</tr>
+</table>
 
 ## Architecture
 
-<img src="assets/readme/architecture.svg" alt="Mandarin architecture" width="100%" />
+<img src="assets/readme/architecture.svg" alt="Mandarin architecture" width="100%">
 
-`Mandarin.Core` never references WPF or any UI framework, so the same conversion engine
-can later be reused from a CLI or a different front end. Adding a new format means
-adding a new `IConverter` implementation, never growing an if/else chain.
+Two rules shape the codebase:
+
+1. **`Mandarin.Core` never references a UI framework.** The conversion engine is usable
+   from a CLI or a different front end without touching a line of it.
+2. **A new format is a new `IConverter`.** Formats are registered as strategies, never
+   added to a growing switch statement.
 
 ## Getting started
 
-1. Install the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
-2. Video/audio features need `ffmpeg.exe`, which Mandarin **never downloads or
-   bundles** (licensing reasons, see `CLAUDE.md`). Get an LGPL build from
-   [gyan.dev](https://www.gyan.dev/ffmpeg/builds/) or
-   [BtbN's builds](https://github.com/BtbN/FFmpeg-Builds), and either:
-   - place it at `src/Mandarin.App/bin/<Debug|Release>/net8.0-windows/ffmpeg/ffmpeg.exe`
-     (next to the built app), **or**
-   - set the `MANDARIN_FFMPEG_PATH` environment variable to its full path.
-
-## Commands
+**Requirements:** Windows 10 or 11, and the
+[.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) to build from source.
 
 ```bash
-dotnet build                                  # build everything
-dotnet test                                   # run all tests (Core + Shell)
+git clone https://github.com/sametgurtuna/mandarin.git
+cd mandarin
+dotnet run --project src/Mandarin.App
+```
+
+### FFmpeg for video and audio
+
+Image, PDF, text and archive conversion work out of the box. Video and audio need
+`ffmpeg.exe`, which Mandarin never downloads and never bundles, for licensing reasons.
+Grab an LGPL build from [gyan.dev](https://www.gyan.dev/ffmpeg/builds/) or
+[BtbN](https://github.com/BtbN/FFmpeg-Builds), then either:
+
+- drop it next to the built app at
+  `src/Mandarin.App/bin/<Debug|Release>/net8.0-windows/ffmpeg/ffmpeg.exe`,
+- set `MANDARIN_FFMPEG_PATH` to its full path, or
+- point at it from **Settings, Choose ffmpeg.exe**.
+
+Without it, video and audio actions open a setup dialog instead of failing silently.
+
+## Building and publishing
+
+```bash
+dotnet build                                  # build the solution
+dotnet test                                   # run the Core and Shell test suites
 dotnet run --project src/Mandarin.App         # run the app
 ```
 
-Publish a distributable, self contained single exe (no .NET runtime needed on the
-target machine):
+Publish a self contained single file executable, which is how Mandarin is distributed:
 
 ```bash
 dotnet publish src/Mandarin.App/Mandarin.App.csproj -c Release -r win-x64 \
@@ -136,52 +197,73 @@ dotnet publish src/Mandarin.App/Mandarin.App.csproj -c Release -r win-x64 \
   -p:IncludeNativeLibrariesForSelfExtract=true -o publish
 ```
 
+The result runs on a machine with no .NET runtime installed. There is no MSIX package,
+because MSIX needs a code signing certificate for real distribution.
+
 ## Explorer integration
 
-Settings has a "Show 'Convert with Mandarin' on the right click menu" checkbox. It
-adds a single static verb to Explorer's context menu for every file type, a classic
-per user registry entry that needs no installer or admin rights. This is a single
-menu entry, not a per format submenu; see the Packaging section in `CLAUDE.md` for why.
+Settings has a checkbox that adds **Convert with Mandarin** to the Explorer context menu
+for every file type. It is a classic per user registry verb: no COM server, no installer
+and no admin rights, and unticking the box removes it cleanly. Clicking it launches
+Mandarin with the selected file and opens the format wheel for it.
 
-## Project structure
+## Project layout
 
 ```
 Mandarin.slnx
 src/
-  Mandarin.App/       WPF UI: tray icon, floating panel, ViewModels, views
-  Mandarin.Core/       Conversion engines, advanced tools, merge, format registry
-                        (no WPF/UI references, usable from a CLI or another front end)
-  Mandarin.Shell/       Explorer right click integration
+  Mandarin.App/          WPF UI: tray icon, panel, radial wheel, dialogs
+    Themes/              design tokens, control styles, light and dark palettes
+    Resources/           Strings.resx and Strings.tr.resx localization
+    ViewModels/          MVVM view models
+    Views/               windows and dialogs
+  Mandarin.Core/         conversion engine, no UI references
+    Conversion/          IConverter implementations and the format registry
+    AdvancedTools/       compress, crop, trim, split, redact, metadata
+    Merge/               multi file merge
+    Settings/            JSON settings under %AppData%\Mandarin
+  Mandarin.Shell/        Explorer context menu integration
 tests/
   Mandarin.Core.Tests/
   Mandarin.Shell.Tests/
-assets/                icons, color palette
-PLAN.md                phase by phase roadmap
-CLAUDE.md              architecture notes and conventions for AI assisted development
+assets/                  icon and README images
 ```
 
-See `CLAUDE.md` for architecture conventions and hard rules, and `PLAN.md` for the
-full phase by phase history of how this was built.
+## Design principles
+
+- **Offline is a hard rule, not a default.** There is no network code in the project.
+- **Never crash on bad input.** Corrupt files, missing codecs and unsupported pairs
+  produce a clear message and leave the app running.
+- **Async all the way.** No conversion ever blocks the UI thread.
+- **Styling lives in `Themes/`.** No hardcoded colours, font sizes or corner radii in
+  views. Code built UI reads the same tokens.
+- **Honest previews.** A tool that could not fully honour a request reports a warning
+  instead of a plain success.
 
 ## Roadmap
 
-The detailed phase by phase plan lives in `PLAN.md`. In short:
+`PLAN.md` holds the full phase by phase history and the current plan.
 
-- ✅ **Phase 1**: Core image/PDF/text conversion and the panel UI
-- ✅ **Phase 2**: Video/audio conversion (ffmpeg integration)
-- ✅ **Phase 3**: Advanced tools (compress, crop, trim, split, merge, metadata)
-- ✅ **Phase 4**: Theme system, localization (EN/TR), Explorer integration
-- 🔄 **Phase 5+**: Maintenance, polish, and feature work driven by user feedback
+| Phase | Scope | Status |
+|---|---|---|
+| 0 | Solution skeleton and project boundaries | Done |
+| 1 | Image conversion and the floating panel | Done |
+| 2 | Video and audio through FFmpeg | Done |
+| 3 | PDF, text and subtitles | Done |
+| 4 | Archives | Done |
+| 5 | Advanced tools behind the Shift and Alt wheel | Done |
+| 6 | Batch drop, merge, Explorer integration, packaging, localization | Done |
+| - | Design system, acrylic dialogs, light and dark themes, tool dialog polish | Done |
 
-## Contributing
+Still open: a batch queue with per file status, and one click presets as a second ring on
+the wheel.
 
-This project is under active development. Feel free to open an issue for bugs or
-feature requests.
+## Acknowledgements
+
+Mandarin is inspired by [Tangerine for Mac](https://tangerineformac.com). The concept of
+a zero click drop target is theirs; the implementation, interface and artwork here are
+original.
 
 <div align="center">
-
----
-
-Made with 🍊 for Windows
-
+<sub>Built for Windows. Runs entirely on your machine.</sub>
 </div>
