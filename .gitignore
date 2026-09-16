@@ -50,6 +50,9 @@ ffmpeg.exe
 # ===== App settings written at runtime =====
 appsettings.local.json
 
+# ===== Local marketing site, not part of the shipped project =====
+website/
+
 # ===== OS junk =====
 Thumbs.db
 ehthumbs.db
