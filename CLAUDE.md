@@ -6,8 +6,11 @@ accurate — update it whenever architecture or conventions change.
 ## What this project is
 
 **Mandarin**: a Windows-native, fully offline, zero-click file converter, inspired by
-"Tangerine for Mac". Drag a file onto a floating panel; hold Shift to convert instantly;
-hold Shift+Alt for advanced tools (compress, crop, trim, split, merge, strip metadata).
+"Tangerine for Mac". No floating panel or icon sits on the desktop — Mandarin lives only
+in the tray. Hold Shift while dragging any file, anywhere, to bring up the radial format
+wheel at the cursor; hold Shift+Alt for advanced tools (compress, crop, trim, split,
+merge, strip metadata). The Explorer "Convert with Mandarin" right-click verb opens the
+same wheel without needing Shift.
 
 Full phase-by-phase roadmap lives in `PLAN.md` — always check which phase we're on
 before starting work, and don't jump ahead to a later phase without confirmation.
@@ -38,7 +41,7 @@ before starting work, and don't jump ahead to a later phase without confirmation
 ```
 Mandarin.slnx
 src/
-  Mandarin.App/       WPF UI: tray icon, floating panel, ViewModels, views, Themes/
+  Mandarin.App/       WPF UI: tray icon, radial wheel, ViewModels, views, Themes/
                        (design tokens + control styles), Resources/ (Strings.resx
                        localization)
   Mandarin.Core/       Conversion engines (Conversion/), advanced tools (AdvancedTools/),

@@ -17,7 +17,6 @@ using Mandarin.Core.Merge;
 using Mandarin.Core.Settings;
 using WpfApplication = System.Windows.Application;
 using StartupEventArgs = System.Windows.StartupEventArgs;
-using WindowState = System.Windows.WindowState;
 using ExitEventArgs = System.Windows.ExitEventArgs;
 using Mandarin.App.Themes;
 
@@ -38,8 +37,6 @@ public partial class App : WpfApplication
     {
         base.OnStartup(e);
         ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown;
-
-        var isStartupLaunch = e.Args.Contains("--startup");
 
         _singleInstanceService = new SingleInstanceService();
         if (!_singleInstanceService.TryAcquire())
@@ -130,22 +127,22 @@ public partial class App : WpfApplication
         _singleInstanceService.StartListening(filePath =>
             Dispatcher.Invoke(() => _panelWindow.TriggerExternalFileRequest(filePath)));
 
+        // A file argument means Explorer's "Convert with Mandarin" verb launched us,
+        // or another launch attempt handed one off before exiting (see above). A
+        // plain launch — manual, or Windows starting it at sign-in via --startup —
+        // has nothing to do here: Mandarin has no window to show, just the tray
+        // icon and the global Shift-drag hook started below.
         var startupFilePathArg = e.Args.FirstOrDefault(a => a != "--startup");
         if (startupFilePathArg is not null)
         {
             _panelWindow.TriggerExternalFileRequest(startupFilePathArg);
         }
-        else
-        {
-            // Launched with no file: either a normal manual launch, or Windows
-            // starting it at sign-in (--startup). Either way the panel is the
-            // whole point of the app, so show it — quietly, without stealing
-            // focus, when Windows did the launching.
-            _panelWindow.ShowPanel(activate: !isStartupLaunch);
-        }
 
         _trayIconService = new TrayIconService();
-        _trayIconService.OpenRequested += OnOpenRequested;
+        // No panel window to bring forward — "Open" and "Settings" both surface
+        // Settings, the only visible window Mandarin has outside the
+        // drag-triggered wheel.
+        _trayIconService.OpenRequested += OnSettingsRequested;
         _trayIconService.SettingsRequested += OnSettingsRequested;
         _trayIconService.QuitRequested += OnQuitRequested;
     }
@@ -156,11 +153,6 @@ public partial class App : WpfApplication
         _trayIconService?.Dispose();
         _singleInstanceService?.Dispose();
         base.OnExit(e);
-    }
-
-    private void OnOpenRequested()
-    {
-        _panelWindow.ShowPanel();
     }
 
     private void OnSettingsRequested()

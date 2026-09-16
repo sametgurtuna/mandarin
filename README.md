@@ -10,8 +10,8 @@
   <img src="https://img.shields.io/badge/install-single%20exe-8A63D2?style=flat-square" alt="Single executable">
 </p>
 
-<p><b>Drop a file on the panel. Pick a format. Done.</b><br>
-No upload, no sign in, no wizard. Everything runs on your machine.</p>
+<p><b>Hold Shift, drag any file, pick a format. Done.</b><br>
+No panel to find, no upload, no sign in, no wizard. Everything runs on your machine.</p>
 
 </div>
 
@@ -19,7 +19,7 @@ No upload, no sign in, no wizard. Everything runs on your machine.</p>
 
 ## Contents
 
-[Overview](#overview) · [The three gestures](#the-three-gestures) · [Advanced tools](#advanced-tools) ·
+[Overview](#overview) · [The two gestures](#the-two-gestures) · [Advanced tools](#advanced-tools) ·
 [Supported formats](#supported-formats) · [Themes and language](#themes-and-language) ·
 [Architecture](#architecture) · [Getting started](#getting-started) ·
 [Building and publishing](#building-and-publishing) · [Explorer integration](#explorer-integration) ·
@@ -29,39 +29,34 @@ No upload, no sign in, no wizard. Everything runs on your machine.</p>
 
 ## Overview
 
-Mandarin is a file converter that stays out of the way. It lives in the tray as a small
-floating panel; you drag a file onto it and the conversion happens in place, with no
-window to manage and no file ever leaving the machine.
+Mandarin is a file converter that stays out of the way. It has no window and no icon on
+your desktop, just a tray icon. Hold Shift and drag any file, from anywhere, and the
+radial wheel opens right at your cursor; release over a format and the conversion
+happens in place, with no file ever leaving the machine.
 
 |  |  |
 |---|---|
-| **Zero click** | Hold Shift while dropping and Mandarin converts straight to the last used format. No dialog at all. |
+| **Zero click** | Hold Shift while dragging and Mandarin converts straight to the last used format. No dialog at all. |
 | **Fully offline** | No network calls anywhere in the codebase, no telemetry, no analytics, no update pings. |
 | **Never blocks** | Conversions run async with a cancellable progress HUD. Bad input produces a message, never a crash. |
 | **Single executable** | Publishes as one self contained `.exe`. No .NET runtime, no installer, no admin rights. |
 | **Native look** | Windows 11 acrylic dialogs, system light and dark theme, English and Turkish. |
 
-<div align="center">
-  <img src="assets/readme/panel.png" alt="The floating Mandarin panel" width="150">
-  <br>
-  <sub>The panel. That is the entire permanent UI.</sub>
-</div>
+## The two gestures
 
-## The three gestures
-
-Everything Mandarin does is reachable from a drop. The modifier you hold decides what
-happens.
+There is no window to drop a file onto. Instead, hold Shift while dragging any file,
+from any app or folder, and the wheel opens under your cursor.
 
 <table>
 <tr>
 <td width="50%" align="center" valign="top">
 <img src="assets/readme/convert-wheel.png" alt="Convert wheel" width="100%">
-<br><b>Drop</b> or <b>Shift + drop</b>
-<br><sub>The radial wheel lists every format the dropped file can become. Keyboard navigable, or release over a petal.</sub>
+<br><b>Shift + drag</b>
+<br><sub>The radial wheel lists every format the file can become. Keyboard navigable, or release over a petal.</sub>
 </td>
 <td width="50%" align="center" valign="top">
 <img src="assets/readme/tools-wheel.png" alt="Advanced tools wheel" width="100%">
-<br><b>Shift + Alt + drop</b>
+<br><b>Shift + Alt + drag</b>
 <br><sub>The same wheel switches to the advanced tools available for that file type.</sub>
 </td>
 </tr>
@@ -69,11 +64,11 @@ happens.
 
 | Gesture | Result |
 |---|---|
-| Drop | Radial wheel with every target format for that file |
-| Shift + drop | Instant conversion to the last used or best guess format |
-| Shift + Alt + drop | Advanced tools for that file type |
-| Drop several files | Batch conversion, all files to one target format |
-| Shift + Alt + drop several files of one type | Merge them into a single file |
+| Shift + drag, release over a petal | Convert to that format |
+| Shift + Alt + drag, release over a petal | Run that advanced tool |
+| Shift + drag several files, release in the centre | Batch conversion, all files to one target format |
+| Shift + Alt + drag several files of one type | Merge them into a single file |
+| Right-click a file, **Convert with Mandarin** | Opens the wheel without needing Shift |
 
 <div align="center">
   <img src="assets/readme/progress-hud.png" alt="Progress HUD" width="420">
@@ -236,7 +231,7 @@ launches it quietly into the tray, without stealing focus.
 ```
 Mandarin.slnx
 src/
-  Mandarin.App/          WPF UI: tray icon, panel, radial wheel, dialogs
+  Mandarin.App/          WPF UI: tray icon, radial wheel, dialogs
     Themes/              design tokens, control styles, light and dark palettes
     Resources/           Strings.resx and Strings.tr.resx localization
     ViewModels/          MVVM view models

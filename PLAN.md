@@ -109,6 +109,19 @@ A UI/UX pass, done in this order, each verified before the next:
 Still open from that pass: a batch queue with per-file status, and one-click presets
 ("Web JPG 1600px q80", "Discord MP4 under 10MB") as a second ring on the wheel.
 
+### Later scope change: the floating panel bubble was removed
+
+Phase 1's floating panel (a small draggable bubble that sat on the desktop as a drop
+target) is gone. It never actually needed to be visible: the global Shift/Alt-drag hook
+(`GlobalDragHookService`) opens the radial wheel directly at the cursor regardless of any
+window, and the Explorer "Convert with Mandarin" verb does the same at the cursor
+position instead of anchoring near the panel. `PanelWindow` still exists as the
+conversion/advanced-tool executor and progress-HUD host — it is just never `Show()`n.
+One real gesture was lost along with the bubble: dropping a file with no modifier held,
+since that needs a visible OS drop target. Shift-drag (and the Explorer verb) are the only
+ways in now. A first-run flow to explain the invisible tray-only behavior to a brand-new
+user (Windows has no equivalent affordance to discover) is an open item, not yet built.
+
 ## Non-negotiable constraints (apply to every phase)
 - `Mandarin.Core` must have zero WPF/UI dependencies — conversion logic is reusable from
   a CLI or a different UI later.

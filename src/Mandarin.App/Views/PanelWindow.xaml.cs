@@ -28,8 +28,10 @@ using Point = System.Windows.Point;
 namespace Mandarin.App.Views;
 
 /// <summary>
-/// The compact floating bubble panel that sits on screen, handles bubble dragging,
-/// and executes all background conversion operations with progress and notifications.
+/// Never shown on screen. This window exists only to host the conversion/advanced-tool
+/// execution logic, the progress HUD and toasts — the actual UI is the radial wheel,
+/// reached by holding Shift (or Shift+Alt) while dragging any file anywhere, or via the
+/// Explorer "Convert with Mandarin" verb. There is no floating bubble on the desktop.
 /// </summary>
 public partial class PanelWindow : Window
 {
@@ -92,26 +94,14 @@ public partial class PanelWindow : Window
         HoverRing.Visibility = Visibility.Collapsed;
     }
 
-    /// <summary>Brings the floating panel on screen. The one place other code
-    /// (tray "Open", startup, external file requests) reveals the panel from.</summary>
-    public void ShowPanel(bool activate = true)
-    {
-        if (WindowState == WindowState.Minimized)
-        {
-            WindowState = WindowState.Normal;
-        }
-
-        Show();
-        if (activate)
-        {
-            Activate();
-        }
-    }
-
+    /// <summary>
+    /// Handles a file handed to Mandarin from outside a Shift-drag: the Explorer
+    /// "Convert with Mandarin" verb, or a second launch forwarded over the
+    /// single-instance pipe. Opens the radial wheel at the current cursor position —
+    /// there is no panel window to anchor it to.
+    /// </summary>
     public void TriggerExternalFileRequest(string filePath)
     {
-        ShowPanel();
-
         if (!File.Exists(filePath)) return;
 
         if (!_conversionService.IsSupported(filePath))
@@ -125,14 +115,9 @@ public partial class PanelWindow : Window
         }
 
         var wheel = RadialWheelWindowAccessor?.Invoke();
-        if (wheel != null)
+        if (wheel != null && GlobalDragHookService.GetCursorPos(out var cursorPt))
         {
-            var centerPt = new GlobalDragHookService.POINT
-            {
-                X = (int)(Left + 32),
-                Y = (int)(Top + 32)
-            };
-            wheel.ShowAtCursor(centerPt, isAlt: false);
+            wheel.ShowAtCursor(cursorPt, isAlt: false);
         }
     }
 
