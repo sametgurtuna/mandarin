@@ -76,6 +76,9 @@
   <data name="Settings_ExplorerHeading" xml:space="preserve"><value>Gezgin entegrasyonu</value></data>
   <data name="Settings_ExplorerCheckbox" xml:space="preserve"><value>Sağ tık menüsünde "Mandarin ile dönüştür" göster</value></data>
   <data name="Settings_ExplorerErrorMessage" xml:space="preserve"><value>Sağ tık menüsü güncellenemedi: {0}</value></data>
+  <data name="Settings_StartupHeading" xml:space="preserve"><value>Başlangıç</value></data>
+  <data name="Settings_StartupCheckbox" xml:space="preserve"><value>Windows başlarken Mandarin'i başlat</value></data>
+  <data name="Settings_StartupErrorMessage" xml:space="preserve"><value>Başlangıç ayarı güncellenemedi: {0}</value></data>
 
   <data name="Toast_ConvertedTitle" xml:space="preserve"><value>Dönüştürüldü</value></data>
   <data name="Toast_ConversionFailedTitle" xml:space="preserve"><value>Dönüştürme başarısız</value></data>

@@ -34,6 +34,9 @@ public static class Strings
     public static string SettingsExplorerHeading => Get("Settings_ExplorerHeading");
     public static string SettingsExplorerCheckbox => Get("Settings_ExplorerCheckbox");
     public static string SettingsExplorerErrorMessage(string error) => Get("Settings_ExplorerErrorMessage", error);
+    public static string SettingsStartupHeading => Get("Settings_StartupHeading");
+    public static string SettingsStartupCheckbox => Get("Settings_StartupCheckbox");
+    public static string SettingsStartupErrorMessage(string error) => Get("Settings_StartupErrorMessage", error);
 
     public static string SettingsThemeLabel => Get("Settings_ThemeLabel");
     public static string SettingsThemeSystem => Get("Settings_ThemeSystem");

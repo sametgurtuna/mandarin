@@ -76,6 +76,9 @@
   <data name="Settings_ExplorerHeading" xml:space="preserve"><value>Explorer integration</value></data>
   <data name="Settings_ExplorerCheckbox" xml:space="preserve"><value>Show "Convert with Mandarin" on the right-click menu</value></data>
   <data name="Settings_ExplorerErrorMessage" xml:space="preserve"><value>Couldn't update the right-click menu: {0}</value></data>
+  <data name="Settings_StartupHeading" xml:space="preserve"><value>Startup</value></data>
+  <data name="Settings_StartupCheckbox" xml:space="preserve"><value>Start Mandarin when Windows starts</value></data>
+  <data name="Settings_StartupErrorMessage" xml:space="preserve"><value>Couldn't update the startup setting: {0}</value></data>
 
   <data name="Toast_ConvertedTitle" xml:space="preserve"><value>Converted</value></data>
   <data name="Toast_ConversionFailedTitle" xml:space="preserve"><value>Conversion failed</value></data>

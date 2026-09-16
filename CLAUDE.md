@@ -43,11 +43,13 @@ src/
                        localization)
   Mandarin.Core/       Conversion engines (Conversion/), advanced tools (AdvancedTools/),
                         multi-file merge (Merge/), format/tool registries — NO WPF refs
-  Mandarin.Shell/       Explorer right-click integration (registry-based verb, no COM)
+  Mandarin.Shell/       Explorer right-click integration and startup registration
+                        (registry-based, no COM, no admin rights)
 tests/
   Mandarin.Core.Tests/
   Mandarin.Shell.Tests/
 assets/                icons, color palette
+installer/             Inno Setup script (installer/mandarin.iss) — see Packaging below
 PLAN.md
 CLAUDE.md
 README.md
@@ -113,19 +115,31 @@ README.md
 - Build: `dotnet build`
 - Run: `dotnet run --project src/Mandarin.App`
 - Test: `dotnet test`
-- Publish (self-contained single exe, the distribution format — see Packaging below):
+- Publish (self-contained single exe, the installer's input — see Packaging below):
   `dotnet publish src/Mandarin.App/Mandarin.App.csproj -c Release -r win-x64
   --self-contained true -p:PublishSingleFile=true
   -p:IncludeNativeLibrariesForSelfExtract=true -o publish`
+- Build the installer (after the publish step above; needs Inno Setup 6 —
+  `winget install JRSoftware.InnoSetup`):
+  `"%LocalAppData%\Programs\Inno Setup 6\ISCC.exe" installer\mandarin.iss`
+  → `installer-output\MandarinSetup.exe`
 
 ## Packaging
 
-Distribution is a self-contained single-file `.exe` (`dotnet publish`, see Commands) —
-no .NET runtime install required on the target machine. No MSIX: MSIX needs a
-code-signing certificate for real distribution, which this project doesn't have (decided
-in Phase 6). Revisit MSIX if/when there's a purchased cert or a Microsoft Store listing.
-`ffmpeg.exe` is never bundled into the exe or the repo — it's a separate manual step (see
-Phase 2 in `PLAN.md`) for the same licensing reason bundling FFmpeg needs a check-in.
+Distribution is a self-contained single-file `.exe` (`dotnet publish`, see Commands),
+wrapped in an Inno Setup installer (`installer/mandarin.iss`) — no .NET runtime install
+required on the target machine. The installer installs per-user to
+`%LocalAppData%\Programs\Mandarin` and needs no admin rights or UAC prompt, matching the
+app's own no-admin-rights registry usage (Explorer verb, startup entry). It offers a
+"start Mandarin when Windows starts" task (checked by default), which writes the same
+`HKCU\...\Run` value `Mandarin.Shell.StartupIntegration` writes at runtime from Settings,
+so the two stay in sync. Uninstalling removes that value and the Explorer context-menu
+verb if either was ever turned on. The installer is unsigned (no code-signing
+certificate — same reason MSIX was declined in Phase 6), so Windows SmartScreen shows a
+first-run warning; revisit signing if/when there's a purchased cert.
+`ffmpeg.exe` is never bundled into the exe, the installer, or the repo — it's a separate
+manual step (see Phase 2 in `PLAN.md`) for the same licensing reason bundling FFmpeg needs
+a check-in.
 
 ## Workflow expectations
 

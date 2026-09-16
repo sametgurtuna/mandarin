@@ -53,6 +53,9 @@ appsettings.local.json
 # ===== Local marketing site, not part of the shipped project =====
 website/
 
+# ===== Built installer, produced from installer/mandarin.iss =====
+installer-output/
+
 # ===== OS junk =====
 Thumbs.db
 ehthumbs.db

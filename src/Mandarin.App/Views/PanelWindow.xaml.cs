@@ -92,7 +92,9 @@ public partial class PanelWindow : Window
         HoverRing.Visibility = Visibility.Collapsed;
     }
 
-    public void TriggerExternalFileRequest(string filePath)
+    /// <summary>Brings the floating panel on screen. The one place other code
+    /// (tray "Open", startup, external file requests) reveals the panel from.</summary>
+    public void ShowPanel(bool activate = true)
     {
         if (WindowState == WindowState.Minimized)
         {
@@ -100,7 +102,15 @@ public partial class PanelWindow : Window
         }
 
         Show();
-        Activate();
+        if (activate)
+        {
+            Activate();
+        }
+    }
+
+    public void TriggerExternalFileRequest(string filePath)
+    {
+        ShowPanel();
 
         if (!File.Exists(filePath)) return;
 

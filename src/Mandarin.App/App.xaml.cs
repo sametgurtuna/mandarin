@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Mandarin.App.Services;
 using Mandarin.App.ViewModels;
@@ -38,12 +39,15 @@ public partial class App : WpfApplication
         base.OnStartup(e);
         ShutdownMode = System.Windows.ShutdownMode.OnExplicitShutdown;
 
+        var isStartupLaunch = e.Args.Contains("--startup");
+
         _singleInstanceService = new SingleInstanceService();
         if (!_singleInstanceService.TryAcquire())
         {
-            if (e.Args.Length > 0)
+            var filePathArg = e.Args.FirstOrDefault(a => a != "--startup");
+            if (filePathArg is not null)
             {
-                SingleInstanceService.TrySendToRunningInstance(e.Args[0]);
+                SingleInstanceService.TrySendToRunningInstance(filePathArg);
             }
 
             _singleInstanceService.Dispose();
@@ -126,9 +130,18 @@ public partial class App : WpfApplication
         _singleInstanceService.StartListening(filePath =>
             Dispatcher.Invoke(() => _panelWindow.TriggerExternalFileRequest(filePath)));
 
-        if (e.Args.Length > 0)
+        var startupFilePathArg = e.Args.FirstOrDefault(a => a != "--startup");
+        if (startupFilePathArg is not null)
         {
-            _panelWindow.TriggerExternalFileRequest(e.Args[0]);
+            _panelWindow.TriggerExternalFileRequest(startupFilePathArg);
+        }
+        else
+        {
+            // Launched with no file: either a normal manual launch, or Windows
+            // starting it at sign-in (--startup). Either way the panel is the
+            // whole point of the app, so show it — quietly, without stealing
+            // focus, when Windows did the launching.
+            _panelWindow.ShowPanel(activate: !isStartupLaunch);
         }
 
         _trayIconService = new TrayIconService();
@@ -147,7 +160,7 @@ public partial class App : WpfApplication
 
     private void OnOpenRequested()
     {
-        OnSettingsRequested();
+        _panelWindow.ShowPanel();
     }
 
     private void OnSettingsRequested()

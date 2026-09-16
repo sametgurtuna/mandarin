@@ -158,8 +158,19 @@ Two rules shape the codebase:
 
 ## Getting started
 
-**Requirements:** Windows 10 or 11, and the
-[.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) to build from source.
+**For most people:** grab `MandarinSetup.exe` from the
+[latest release](https://github.com/sametgurtuna/mandarin/releases/latest) and run it.
+It installs per user to `%LocalAppData%\Programs\Mandarin`, needs no admin rights, and
+offers a "start Mandarin when Windows starts" checkbox (on by default) so it is always
+running after a restart, ready in the tray. The installer is unsigned, so Windows
+SmartScreen shows a one-time "unknown publisher" warning on first run; choose
+**More info, Run anyway**.
+
+Prefer to run without installing? Grab the standalone `Mandarin.App.exe` from the same
+release page and put it wherever you like.
+
+**To build from source:** Windows 10 or 11, and the
+[.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
 
 ```bash
 git clone https://github.com/sametgurtuna/mandarin.git
@@ -200,12 +211,25 @@ dotnet publish src/Mandarin.App/Mandarin.App.csproj -c Release -r win-x64 \
 The result runs on a machine with no .NET runtime installed. There is no MSIX package,
 because MSIX needs a code signing certificate for real distribution.
 
-## Explorer integration
+Wrap that build into the installer with [Inno Setup 6](https://jrsoftware.org/isinfo.php)
+(`winget install JRSoftware.InnoSetup`):
+
+```bash
+"%LocalAppData%\Programs\Inno Setup 6\ISCC.exe" installer\mandarin.iss
+```
+
+That produces `installer-output\MandarinSetup.exe`: a per-user installer with a Start
+Menu shortcut, an optional desktop icon, and the startup task described above. It needs
+no admin rights either, same as the app itself.
+
+## Explorer integration and startup
 
 Settings has a checkbox that adds **Convert with Mandarin** to the Explorer context menu
-for every file type. It is a classic per user registry verb: no COM server, no installer
-and no admin rights, and unticking the box removes it cleanly. Clicking it launches
-Mandarin with the selected file and opens the format wheel for it.
+for every file type, and one that starts Mandarin automatically when Windows starts.
+Both are classic per user registry entries: no COM server, no scheduled task, no admin
+rights, and unticking either box removes it cleanly. The Explorer entry launches
+Mandarin with the selected file and opens the format wheel for it; the startup entry
+launches it quietly into the tray, without stealing focus.
 
 ## Project layout
 
@@ -222,10 +246,11 @@ src/
     AdvancedTools/       compress, crop, trim, split, redact, metadata
     Merge/               multi file merge
     Settings/            JSON settings under %AppData%\Mandarin
-  Mandarin.Shell/        Explorer context menu integration
+  Mandarin.Shell/        Explorer context menu and startup registration
 tests/
   Mandarin.Core.Tests/
   Mandarin.Shell.Tests/
+installer/               Inno Setup script that builds MandarinSetup.exe
 assets/                  icon and README images
 ```
 

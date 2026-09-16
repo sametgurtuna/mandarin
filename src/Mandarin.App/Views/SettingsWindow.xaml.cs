@@ -32,6 +32,8 @@ public partial class SettingsWindow : Window
         CheckForUpdatesButton.Content = Strings.SettingsCheckForUpdatesButton;
         ExplorerHeadingText.Text = Strings.SettingsExplorerHeading;
         ExplorerIntegrationCheckBox.Content = Strings.SettingsExplorerCheckbox;
+        StartupHeadingText.Text = Strings.SettingsStartupHeading;
+        StartupCheckBox.Content = Strings.SettingsStartupCheckbox;
 
         foreach (ComboBoxItem item in ThemeComboBox.Items)
         {
@@ -52,6 +54,7 @@ public partial class SettingsWindow : Window
         }
 
         ExplorerIntegrationCheckBox.IsChecked = ExplorerIntegration.IsRegistered();
+        StartupCheckBox.IsChecked = StartupIntegration.IsRegistered();
         UpdateFfmpegStatus();
 
         _isInitializing = false;
@@ -146,7 +149,35 @@ public partial class SettingsWindow : Window
             ExplorerErrorText.Text = Strings.SettingsExplorerErrorMessage(ex.Message);
             ExplorerErrorText.Visibility = Visibility.Visible;
             ExplorerIntegrationCheckBox.IsChecked = ExplorerIntegration.IsRegistered();
-        UpdateFfmpegStatus();
+        }
+    }
+
+    private void StartupCheckBox_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_isInitializing)
+        {
+            return;
+        }
+
+        try
+        {
+            if (StartupCheckBox.IsChecked == true)
+            {
+                var exePath = Environment.ProcessPath ?? Assembly.GetExecutingAssembly().Location;
+                StartupIntegration.Register(exePath);
+            }
+            else
+            {
+                StartupIntegration.Unregister();
+            }
+
+            StartupErrorText.Visibility = Visibility.Collapsed;
+        }
+        catch (Exception ex) when (ex is UnauthorizedAccessException or InvalidOperationException)
+        {
+            StartupErrorText.Text = Strings.SettingsStartupErrorMessage(ex.Message);
+            StartupErrorText.Visibility = Visibility.Visible;
+            StartupCheckBox.IsChecked = StartupIntegration.IsRegistered();
         }
     }
 }
