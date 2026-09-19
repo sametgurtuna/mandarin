@@ -12,7 +12,7 @@
 ;   "%LocalAppData%\Programs\Inno Setup 6\ISCC.exe" installer\mandarin.iss
 
 #define MyAppName "Mandarin"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.1.0"
 #define MyAppPublisher "Mandarin"
 #define MyAppURL "https://github.com/sametgurtuna/mandarin"
 #define MyAppExeName "Mandarin.App.exe"

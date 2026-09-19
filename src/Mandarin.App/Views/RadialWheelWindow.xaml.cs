@@ -37,8 +37,11 @@ public partial class RadialWheelWindow : Window
     private List<string>? _activeFiles;
     private bool _isAdvancedMode;
     private bool _isOpen;
+    private bool _hasValidDragSession;
+    private System.Windows.Threading.DispatcherTimer? _probeTimer;
 
     public event Action<RadialMenuItem, List<string>, Point?>? ActionTriggered;
+    public event Action? ProbeFailed;
 
     public RadialWheelWindow(
         ConversionService conversionService,
@@ -68,7 +71,13 @@ public partial class RadialWheelWindow : Window
 
     public void ShowAtCursor(GlobalDragHookService.POINT screenPoint, bool isAlt)
     {
+        _probeTimer?.Stop();
+        _probeTimer = null;
+
         _isAdvancedMode = isAlt;
+        _hasValidDragSession = false;
+        _isOpen = false;
+        RootGrid.Opacity = 0.0;
 
         // Center on cursor (size is 360x360)
         double targetLeft = screenPoint.X - 180;
@@ -81,19 +90,48 @@ public partial class RadialWheelWindow : Window
         Left = targetLeft;
         Top = targetTop;
 
-        _isOpen = true;
+        // Show window transparently (Opacity=0) so Windows OLE subsystem routes DragEnter if files are being dragged
         Show();
-        Activate();
 
-        var sb = (Storyboard)Resources["FadeInStoryboard"];
-        sb.Begin();
+        // If Windows does NOT send DragEnter within 90ms (because user is just clicking/selecting text without dragging files), hide quietly
+        _probeTimer = new System.Windows.Threading.DispatcherTimer
+        {
+            Interval = TimeSpan.FromMilliseconds(90)
+        };
+        _probeTimer.Tick += (_, _) =>
+        {
+            _probeTimer?.Stop();
+            _probeTimer = null;
+
+            if (!_hasValidDragSession)
+            {
+                HideWheel();
+                ProbeFailed?.Invoke();
+            }
+        };
+        _probeTimer.Start();
+    }
+
+    public void UpdateModifiers(bool isAlt)
+    {
+        if (!_isOpen || _activeFiles == null || _activeFiles.Count == 0) return;
+
+        if (_isAdvancedMode != isAlt)
+        {
+            _isAdvancedMode = isAlt;
+            LoadMenuItems(_activeFiles, _isAdvancedMode);
+        }
     }
 
     public void HideWheel()
     {
-        if (!_isOpen) return;
+        _probeTimer?.Stop();
+        _probeTimer = null;
+
         _isOpen = false;
+        _hasValidDragSession = false;
         _activeFiles = null;
+        RootGrid.Opacity = 0.0;
         Hide();
     }
 
@@ -101,27 +139,38 @@ public partial class RadialWheelWindow : Window
     {
         if (e.Data.GetDataPresent(DataFormats.FileDrop))
         {
-            e.Effects = DragDropEffects.Copy;
-
             if (e.Data.GetData(DataFormats.FileDrop) is string[] { Length: > 0 } files)
             {
+                _hasValidDragSession = true;
+                _probeTimer?.Stop();
+                _probeTimer = null;
+
                 _activeFiles = files.ToList();
                 bool isAlt = GlobalDragHookService.IsAltDown() || (Keyboard.Modifiers & ModifierKeys.Alt) != 0;
                 _isAdvancedMode = isAlt;
                 LoadMenuItems(_activeFiles, _isAdvancedMode);
+
+                _isOpen = true;
+                e.Effects = DragDropEffects.Copy;
+
+                var sb = (Storyboard)Resources["FadeInStoryboard"];
+                sb.Begin();
+                e.Handled = true;
+                return;
             }
         }
-        else
-        {
-            e.Effects = DragDropEffects.None;
-        }
 
+        // If data is not a file drop, fail probe and ignore
+        _hasValidDragSession = false;
+        e.Effects = DragDropEffects.None;
         e.Handled = true;
+        HideWheel();
+        ProbeFailed?.Invoke();
     }
 
     private void Window_DragOver(object sender, DragEventArgs e)
     {
-        if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+        if (!e.Data.GetDataPresent(DataFormats.FileDrop) || !_isOpen)
         {
             e.Effects = DragDropEffects.None;
             return;

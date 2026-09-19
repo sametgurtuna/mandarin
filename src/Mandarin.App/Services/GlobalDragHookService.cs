@@ -93,6 +93,7 @@ public sealed class GlobalDragHookService : IDisposable
     private bool _disposed;
 
     public event Action<POINT, bool>? DragShiftDetected;
+    public event Action<bool, bool>? ModifiersChanged;
     public event Action? DragCancelled;
     public event Action? DragEnded;
 
@@ -100,6 +101,11 @@ public sealed class GlobalDragHookService : IDisposable
     {
         _mouseProc = MouseHookCallback;
         _keyboardProc = KeyboardHookCallback;
+    }
+
+    public void ResetDragTriggered()
+    {
+        _dragTriggered = false;
     }
 
     public void Start()
@@ -173,7 +179,7 @@ public sealed class GlobalDragHookService : IDisposable
                 int dx = hookStruct.pt.X - _mouseDownPos.X;
                 int dy = hookStruct.pt.Y - _mouseDownPos.Y;
 
-                if ((dx * dx + dy * dy) > 36) // Moved > 6px while holding mouse button
+                if ((dx * dx + dy * dy) > 25) // Moved > 5px while holding mouse button
                 {
                     if (IsShiftDown() && !_dragTriggered)
                     {
@@ -193,12 +199,13 @@ public sealed class GlobalDragHookService : IDisposable
         {
             int msg = wParam.ToInt32();
             var kbStruct = Marshal.PtrToStructure<KBDLLHOOKSTRUCT>(lParam);
+            bool isKeyDown = msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN;
+            bool isKeyUp = msg == WM_KEYUP || msg == WM_SYSKEYUP;
 
-            if (msg == WM_KEYDOWN || msg == WM_SYSKEYDOWN)
+            if (kbStruct.vkCode == VK_SHIFT || kbStruct.vkCode == VK_LSHIFT || kbStruct.vkCode == VK_RSHIFT)
             {
-                if (kbStruct.vkCode == VK_SHIFT || kbStruct.vkCode == VK_LSHIFT || kbStruct.vkCode == VK_RSHIFT)
+                if (isKeyDown)
                 {
-                    // Check if mouse is down and moving
                     if (_isMouseDown && !_dragTriggered)
                     {
                         _dragTriggered = true;
@@ -206,7 +213,25 @@ public sealed class GlobalDragHookService : IDisposable
                         DragShiftDetected?.Invoke(pt, IsAltDown());
                     }
                 }
-                else if (kbStruct.vkCode == VK_ESCAPE)
+                else if (isKeyUp)
+                {
+                    if (_dragTriggered)
+                    {
+                        _dragTriggered = false;
+                        DragCancelled?.Invoke();
+                    }
+                }
+            }
+            else if (kbStruct.vkCode == VK_MENU || kbStruct.vkCode == VK_LMENU || kbStruct.vkCode == VK_RMENU)
+            {
+                if (_dragTriggered)
+                {
+                    ModifiersChanged?.Invoke(IsShiftDown(), isKeyDown);
+                }
+            }
+            else if (kbStruct.vkCode == VK_ESCAPE && isKeyDown)
+            {
+                if (_dragTriggered)
                 {
                     _dragTriggered = false;
                     DragCancelled?.Invoke();

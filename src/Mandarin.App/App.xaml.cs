@@ -105,6 +105,7 @@ public partial class App : WpfApplication
 
         _radialWheelWindow = new RadialWheelWindow(conversionService, advancedToolService, mergeService, ffmpegRunner);
         _radialWheelWindow.ActionTriggered += (item, files, dropPt) => _panelWindow.ExecuteActionFromExternal(item, files, dropPt);
+        _radialWheelWindow.ProbeFailed += () => _globalDragHook?.ResetDragTriggered();
 
         _panelWindow.RadialWheelWindowAccessor = () => _radialWheelWindow;
 
@@ -112,6 +113,8 @@ public partial class App : WpfApplication
         _globalDragHook = new GlobalDragHookService();
         _globalDragHook.DragShiftDetected += (pt, isAlt) =>
             Dispatcher.Invoke(() => _radialWheelWindow.ShowAtCursor(pt, isAlt));
+        _globalDragHook.ModifiersChanged += (isShift, isAlt) =>
+            Dispatcher.Invoke(() => _radialWheelWindow.UpdateModifiers(isAlt));
         _globalDragHook.DragCancelled += () =>
             Dispatcher.Invoke(() => _radialWheelWindow.HideWheel());
         _globalDragHook.DragEnded += () =>
