@@ -88,6 +88,7 @@ public sealed class GlobalDragHookService : IDisposable
     private readonly LowLevelHookProc _keyboardProc;
 
     private bool _isMouseDown;
+    private bool _hasMovedWhileDown;
     private POINT _mouseDownPos;
     private bool _dragTriggered;
     private bool _disposed;
@@ -135,7 +136,13 @@ public sealed class GlobalDragHookService : IDisposable
         }
 
         _isMouseDown = false;
+        _hasMovedWhileDown = false;
         _dragTriggered = false;
+    }
+
+    public static bool IsMouseDown()
+    {
+        return (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0;
     }
 
     public static bool IsShiftDown()
@@ -161,12 +168,14 @@ public sealed class GlobalDragHookService : IDisposable
             {
                 var hookStruct = Marshal.PtrToStructure<MSLLHOOKSTRUCT>(lParam);
                 _isMouseDown = true;
+                _hasMovedWhileDown = false;
                 _mouseDownPos = hookStruct.pt;
                 _dragTriggered = false;
             }
             else if (msg == WM_LBUTTONUP)
             {
                 _isMouseDown = false;
+                _hasMovedWhileDown = false;
                 if (_dragTriggered)
                 {
                     _dragTriggered = false;
@@ -179,8 +188,9 @@ public sealed class GlobalDragHookService : IDisposable
                 int dx = hookStruct.pt.X - _mouseDownPos.X;
                 int dy = hookStruct.pt.Y - _mouseDownPos.Y;
 
-                if ((dx * dx + dy * dy) > 25) // Moved > 5px while holding mouse button
+                if ((dx * dx + dy * dy) >= 16) // Moved >= 4px while holding mouse button (drag movement)
                 {
+                    _hasMovedWhileDown = true;
                     if (IsShiftDown() && !_dragTriggered)
                     {
                         _dragTriggered = true;
@@ -206,7 +216,7 @@ public sealed class GlobalDragHookService : IDisposable
             {
                 if (isKeyDown)
                 {
-                    if (_isMouseDown && !_dragTriggered)
+                    if (_isMouseDown && _hasMovedWhileDown && !_dragTriggered)
                     {
                         _dragTriggered = true;
                         GetCursorPos(out var pt);
@@ -224,9 +234,25 @@ public sealed class GlobalDragHookService : IDisposable
             }
             else if (kbStruct.vkCode == VK_MENU || kbStruct.vkCode == VK_LMENU || kbStruct.vkCode == VK_RMENU)
             {
-                if (_dragTriggered)
+                if (isKeyDown)
                 {
-                    ModifiersChanged?.Invoke(IsShiftDown(), isKeyDown);
+                    if (_dragTriggered)
+                    {
+                        ModifiersChanged?.Invoke(IsShiftDown(), true);
+                    }
+                    else if (_isMouseDown && _hasMovedWhileDown && IsShiftDown())
+                    {
+                        _dragTriggered = true;
+                        GetCursorPos(out var pt);
+                        DragShiftDetected?.Invoke(pt, true);
+                    }
+                }
+                else if (isKeyUp)
+                {
+                    if (_dragTriggered)
+                    {
+                        ModifiersChanged?.Invoke(IsShiftDown(), false);
+                    }
                 }
             }
             else if (kbStruct.vkCode == VK_ESCAPE && isKeyDown)

@@ -67,6 +67,47 @@ public partial class RadialWheelWindow : Window
         };
 
         RadialMenu.Cancelled += HideWheel;
+
+        Deactivated += (_, _) =>
+        {
+            // If opened via right-click (not in drag mode) and user clicks away, close wheel
+            if (_isOpen && _hasValidDragSession && _probeTimer == null && !GlobalDragHookService.IsMouseDown())
+            {
+                HideWheel();
+            }
+        };
+    }
+
+    public void ShowForFiles(IReadOnlyList<string> files, GlobalDragHookService.POINT screenPoint, bool isAlt = false)
+    {
+        _probeTimer?.Stop();
+        _probeTimer = null;
+
+        _activeFiles = files.ToList();
+        _isAdvancedMode = isAlt;
+        _isOpen = true;
+        _hasValidDragSession = true;
+
+        LoadMenuItems(_activeFiles, _isAdvancedMode);
+
+        MenuContainer.Visibility = Visibility.Visible;
+        MenuContainer.Opacity = 0.0;
+
+        // Center on cursor (size is 360x360)
+        double targetLeft = screenPoint.X - 180;
+        double targetTop = screenPoint.Y - 180;
+
+        targetLeft = Math.Max(SystemParameters.VirtualScreenLeft, Math.Min(SystemParameters.VirtualScreenLeft + SystemParameters.VirtualScreenWidth - 360, targetLeft));
+        targetTop = Math.Max(SystemParameters.VirtualScreenTop, Math.Min(SystemParameters.VirtualScreenTop + SystemParameters.VirtualScreenHeight - 360, targetTop));
+
+        Left = targetLeft;
+        Top = targetTop;
+
+        Show();
+        Activate();
+
+        var sb = (Storyboard)Resources["FadeInStoryboard"];
+        sb.Begin();
     }
 
     public void ShowAtCursor(GlobalDragHookService.POINT screenPoint, bool isAlt)
@@ -77,7 +118,11 @@ public partial class RadialWheelWindow : Window
         _isAdvancedMode = isAlt;
         _hasValidDragSession = false;
         _isOpen = false;
-        RootGrid.Opacity = 0.0;
+
+        // Keep MenuContainer collapsed until a real OLE file drop is confirmed by DragEnter.
+        // RootGrid stays Opacity=1.0 and Background=#01000000 so it is 100% hit-testable by Windows OLE!
+        MenuContainer.Visibility = Visibility.Collapsed;
+        MenuContainer.Opacity = 0.0;
 
         // Center on cursor (size is 360x360)
         double targetLeft = screenPoint.X - 180;
@@ -90,13 +135,13 @@ public partial class RadialWheelWindow : Window
         Left = targetLeft;
         Top = targetTop;
 
-        // Show window transparently (Opacity=0) so Windows OLE subsystem routes DragEnter if files are being dragged
+        // Show window with hit-testable surface so Windows OLE routes DragEnter immediately
         Show();
 
-        // If Windows does NOT send DragEnter within 90ms (because user is just clicking/selecting text without dragging files), hide quietly
+        // If Windows does not deliver DragEnter within 400ms (e.g. user clicked/selected text without dragging files), hide quietly
         _probeTimer = new System.Windows.Threading.DispatcherTimer
         {
-            Interval = TimeSpan.FromMilliseconds(90)
+            Interval = TimeSpan.FromMilliseconds(400)
         };
         _probeTimer.Tick += (_, _) =>
         {
@@ -131,7 +176,8 @@ public partial class RadialWheelWindow : Window
         _isOpen = false;
         _hasValidDragSession = false;
         _activeFiles = null;
-        RootGrid.Opacity = 0.0;
+        MenuContainer.Visibility = Visibility.Collapsed;
+        MenuContainer.Opacity = 0.0;
         Hide();
     }
 
@@ -150,6 +196,7 @@ public partial class RadialWheelWindow : Window
                 _isAdvancedMode = isAlt;
                 LoadMenuItems(_activeFiles, _isAdvancedMode);
 
+                MenuContainer.Visibility = Visibility.Visible;
                 _isOpen = true;
                 e.Effects = DragDropEffects.Copy;
 

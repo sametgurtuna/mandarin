@@ -28,17 +28,17 @@
         </Style>
 
         <Storyboard x:Key="FadeInStoryboard">
-            <DoubleAnimation Storyboard.TargetName="RootGrid"
+            <DoubleAnimation Storyboard.TargetName="MenuContainer"
                              Storyboard.TargetProperty="Opacity"
                              From="0.0" To="1.0" Duration="0:0:0.15" />
-            <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+            <DoubleAnimation Storyboard.TargetName="MenuScaleTransform"
                              Storyboard.TargetProperty="ScaleX"
                              From="0.88" To="1.0" Duration="0:0:0.18">
                 <DoubleAnimation.EasingFunction>
                     <BackEase Amplitude="0.2" EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetName="ScaleTransform"
+            <DoubleAnimation Storyboard.TargetName="MenuScaleTransform"
                              Storyboard.TargetProperty="ScaleY"
                              From="0.88" To="1.0" Duration="0:0:0.18">
                 <DoubleAnimation.EasingFunction>
@@ -49,12 +49,14 @@
     </Window.Resources>
 
     <Grid x:Name="RootGrid" Width="360" Height="360" Background="#01000000"
-          Focusable="False" FocusVisualStyle="{x:Null}"
-          RenderTransformOrigin="0.5,0.5">
-        <Grid.RenderTransform>
-            <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
-        </Grid.RenderTransform>
-
-        <views:RadialMenuControl x:Name="RadialMenu" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          AllowDrop="True"
+          Focusable="False" FocusVisualStyle="{x:Null}">
+        <Grid x:Name="MenuContainer" HorizontalAlignment="Center" VerticalAlignment="Center"
+              RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <ScaleTransform x:Name="MenuScaleTransform" ScaleX="1" ScaleY="1" />
+            </Grid.RenderTransform>
+            <views:RadialMenuControl x:Name="RadialMenu" />
+        </Grid>
     </Grid>
 </Window>

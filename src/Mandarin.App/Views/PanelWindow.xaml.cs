@@ -117,7 +117,7 @@ public partial class PanelWindow : Window
         var wheel = RadialWheelWindowAccessor?.Invoke();
         if (wheel != null && GlobalDragHookService.GetCursorPos(out var cursorPt))
         {
-            wheel.ShowAtCursor(cursorPt, isAlt: false);
+            wheel.ShowForFiles(new[] { filePath }, cursorPt, isAlt: false);
         }
     }
 
